@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRN211-BirdFarmShop", "PRN211-BirdFarmShop\PRN211-BirdFarmShop.csproj", "{1188F0A0-6B20-4ED3-990D-F6487114FAFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PRN211-BirdFarmShop", "PRN211-BirdFarmShop\PRN211-BirdFarmShop.csproj", "{1188F0A0-6B20-4ED3-990D-F6487114FAFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFShopBussinessObjects", "BFShopBussinessObjects\BFShopBussinessObjects.csproj", "{7D58B2CE-968D-4259-A510-850CE5C56D90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFShopDAO", "BFShopDAO\BFShopDAO.csproj", "{7725DB6A-59E4-44B1-9A89-449B305BF940}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFShopRepository", "BFShopRepository\BFShopRepository.csproj", "{F9A09FC6-70BF-4368-AE29-CDA7ECF6BB89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BFShopService", "BFShopService\BFShopService.csproj", "{C1B693A9-0EED-47ED-A477-F9BBA526A4CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{1188F0A0-6B20-4ED3-990D-F6487114FAFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1188F0A0-6B20-4ED3-990D-F6487114FAFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1188F0A0-6B20-4ED3-990D-F6487114FAFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D58B2CE-968D-4259-A510-850CE5C56D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D58B2CE-968D-4259-A510-850CE5C56D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D58B2CE-968D-4259-A510-850CE5C56D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D58B2CE-968D-4259-A510-850CE5C56D90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7725DB6A-59E4-44B1-9A89-449B305BF940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7725DB6A-59E4-44B1-9A89-449B305BF940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7725DB6A-59E4-44B1-9A89-449B305BF940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7725DB6A-59E4-44B1-9A89-449B305BF940}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9A09FC6-70BF-4368-AE29-CDA7ECF6BB89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A09FC6-70BF-4368-AE29-CDA7ECF6BB89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A09FC6-70BF-4368-AE29-CDA7ECF6BB89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A09FC6-70BF-4368-AE29-CDA7ECF6BB89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1B693A9-0EED-47ED-A477-F9BBA526A4CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B693A9-0EED-47ED-A477-F9BBA526A4CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B693A9-0EED-47ED-A477-F9BBA526A4CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B693A9-0EED-47ED-A477-F9BBA526A4CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
