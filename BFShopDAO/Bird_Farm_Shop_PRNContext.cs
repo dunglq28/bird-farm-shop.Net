@@ -18,12 +18,12 @@ namespace BFShopDAO.Entities
         {
         }
 
-        public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; } = null!;
+        public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
+        public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<Role> Roles { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -48,7 +48,7 @@ namespace BFShopDAO.Entities
             modelBuilder.Entity<Account>(entity =>
             {
                 entity.HasKey(e => e.Email)
-                    .HasName("PK__Account__AB6E6165244FCA0D");
+                    .HasName("PK__Account__AB6E61657C0B38EC");
 
                 entity.ToTable("Account");
 
@@ -56,19 +56,29 @@ namespace BFShopDAO.Entities
                     .HasMaxLength(155)
                     .HasColumnName("email");
 
+                entity.Property(e => e.Birthday)
+                    .HasColumnType("datetime")
+                    .HasColumnName("birthday");
+
                 entity.Property(e => e.City)
                     .HasMaxLength(50)
                     .HasColumnName("city");
 
                 entity.Property(e => e.Fullname)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("fullname");
 
+                entity.Property(e => e.Gender)
+                    .HasMaxLength(10)
+                    .HasColumnName("gender");
+
                 entity.Property(e => e.Password)
-                    .IsRequired()
                     .HasMaxLength(155)
                     .HasColumnName("password");
+
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(12)
+                    .HasColumnName("phone");
 
                 entity.Property(e => e.RoleId).HasColumnName("role_id");
 
@@ -91,7 +101,6 @@ namespace BFShopDAO.Entities
                     .HasColumnName("CategoryID");
 
                 entity.Property(e => e.CategoryName)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("Category_Name");
             });
@@ -109,7 +118,6 @@ namespace BFShopDAO.Entities
                     .HasColumnName("create_date");
 
                 entity.Property(e => e.Email)
-                    .IsRequired()
                     .HasMaxLength(155)
                     .HasColumnName("email");
 
@@ -126,22 +134,20 @@ namespace BFShopDAO.Entities
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
+                entity.HasKey(e => new { e.OrderId, e.ProductId })
+                    .HasName("PK__OrderDet__8D19AE47420F8175");
+
                 entity.ToTable("OrderDetail");
 
-                entity.Property(e => e.OrderDetailId)
-                    .HasMaxLength(100)
-                    .HasColumnName("order_detail_id");
-
                 entity.Property(e => e.OrderId)
-                    .IsRequired()
                     .HasMaxLength(100)
                     .HasColumnName("order_id");
-
-                entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.ProductId)
                     .HasMaxLength(50)
                     .HasColumnName("ProductID");
+
+                entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
 
@@ -156,6 +162,7 @@ namespace BFShopDAO.Entities
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetail_ProductId");
             });
 
@@ -182,7 +189,6 @@ namespace BFShopDAO.Entities
                 entity.Property(e => e.Image).HasMaxLength(150);
 
                 entity.Property(e => e.ProductName)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .HasColumnName("Product_Name");
 
@@ -190,15 +196,13 @@ namespace BFShopDAO.Entities
 
                 entity.Property(e => e.QuantitySold).HasColumnName("Quantity_Sold");
 
-                entity.Property(e => e.Status)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.Status).HasMaxLength(50);
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Products__Catego__2E1BDC42");
+                    .HasConstraintName("FK__Products__Catego__412EB0B6");
             });
 
             modelBuilder.Entity<Role>(entity =>
