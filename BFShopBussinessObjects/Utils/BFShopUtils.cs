@@ -65,7 +65,6 @@ namespace BFShopBussinessObjects
             return regex.IsMatch(password);
         }
 
-
         /// <summary>
         /// Check date valid
         /// </summary>
@@ -81,6 +80,12 @@ namespace BFShopBussinessObjects
                 return true;
             else
                 return false;
+        }
+
+        public static bool IsNotNumericString(string value)
+        {
+            var pattern = new Regex(@"^[a-zA-Z ]+$");
+            return pattern.IsMatch(value);
         }
 
         public static AppSettings ConfigureAppSettings()
