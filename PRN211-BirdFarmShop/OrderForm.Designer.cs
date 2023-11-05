@@ -34,14 +34,25 @@
             comboBox1 = new ComboBox();
             textBox2 = new TextBox();
             dateTimePicker1 = new DateTimePicker();
-            textBox1 = new TextBox();
+            txt_MaHoaDon = new TextBox();
             label3 = new Label();
             label5 = new Label();
             label4 = new Label();
             label2 = new Label();
             groupBox2 = new GroupBox();
-            dataGridView1 = new DataGridView();
+            txt_TongTien = new TextBox();
+            label12 = new Label();
+            dtg_OrderDetailList = new DataGridView();
+            ProductId = new DataGridViewTextBoxColumn();
+            Column2 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
+            Column4 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
+            Column6 = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
+            btn_LuuHoaDon = new Button();
+            btn_ThemSanPham = new Button();
+            btn_ThemHoaDon = new Button();
             panel2 = new Panel();
             txt_SoLuong = new TextBox();
             txt_DonGia = new TextBox();
@@ -55,22 +66,14 @@
             label7 = new Label();
             label9 = new Label();
             label8 = new Label();
-            label12 = new Label();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
-            textBox3 = new TextBox();
-            button1 = new Button();
+            label13 = new Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dtg_OrderDetailList).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -110,7 +113,7 @@
             groupBox1.Controls.Add(comboBox1);
             groupBox1.Controls.Add(textBox2);
             groupBox1.Controls.Add(dateTimePicker1);
-            groupBox1.Controls.Add(textBox1);
+            groupBox1.Controls.Add(txt_MaHoaDon);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label5);
             groupBox1.Controls.Add(label4);
@@ -146,12 +149,13 @@
             dateTimePicker1.Size = new Size(266, 31);
             dateTimePicker1.TabIndex = 7;
             // 
-            // textBox1
+            // txt_MaHoaDon
             // 
-            textBox1.Location = new Point(214, 34);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(266, 31);
-            textBox1.TabIndex = 6;
+            txt_MaHoaDon.Location = new Point(214, 34);
+            txt_MaHoaDon.Name = "txt_MaHoaDon";
+            txt_MaHoaDon.ReadOnly = true;
+            txt_MaHoaDon.Size = new Size(266, 31);
+            txt_MaHoaDon.TabIndex = 6;
             // 
             // label3
             // 
@@ -199,9 +203,10 @@
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(textBox3);
+            groupBox2.Controls.Add(label13);
+            groupBox2.Controls.Add(txt_TongTien);
             groupBox2.Controls.Add(label12);
-            groupBox2.Controls.Add(dataGridView1);
+            groupBox2.Controls.Add(dtg_OrderDetailList);
             groupBox2.Controls.Add(panel1);
             groupBox2.Controls.Add(panel2);
             groupBox2.Dock = DockStyle.Fill;
@@ -211,26 +216,130 @@
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Thông tin các mặt hàng";
-            groupBox2.Enter += groupBox2_Enter;
             // 
-            // dataGridView1
+            // txt_TongTien
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6 });
-            dataGridView1.Location = new Point(6, 146);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 62;
-            dataGridView1.RowTemplate.Height = 33;
-            dataGridView1.Size = new Size(1063, 200);
-            dataGridView1.TabIndex = 28;
+            txt_TongTien.Location = new Point(854, 352);
+            txt_TongTien.Name = "txt_TongTien";
+            txt_TongTien.ReadOnly = true;
+            txt_TongTien.Size = new Size(212, 31);
+            txt_TongTien.TabIndex = 26;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.ForeColor = Color.FromArgb(0, 117, 214);
+            label12.Location = new Point(732, 355);
+            label12.Name = "label12";
+            label12.Size = new Size(105, 28);
+            label12.TabIndex = 26;
+            label12.Text = "Tổng tiền:";
+            // 
+            // dtg_OrderDetailList
+            // 
+            dtg_OrderDetailList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtg_OrderDetailList.Columns.AddRange(new DataGridViewColumn[] { ProductId, Column2, Column3, Column4, Column5, Column6 });
+            dtg_OrderDetailList.Location = new Point(6, 146);
+            dtg_OrderDetailList.Name = "dtg_OrderDetailList";
+            dtg_OrderDetailList.RowHeadersWidth = 62;
+            dtg_OrderDetailList.RowTemplate.Height = 33;
+            dtg_OrderDetailList.Size = new Size(1066, 200);
+            dtg_OrderDetailList.TabIndex = 28;
+            dtg_OrderDetailList.CellDoubleClick += dtg_OrderDetailList_CellDoubleClick;
+            // 
+            // ProductId
+            // 
+            ProductId.DataPropertyName = "ProductId";
+            ProductId.HeaderText = "Mã hàng";
+            ProductId.MinimumWidth = 8;
+            ProductId.Name = "ProductId";
+            ProductId.Width = 150;
+            // 
+            // Column2
+            // 
+            Column2.DataPropertyName = "ProductName";
+            Column2.HeaderText = "Tên hàng";
+            Column2.MinimumWidth = 8;
+            Column2.Name = "Column2";
+            Column2.Width = 250;
+            // 
+            // Column3
+            // 
+            Column3.DataPropertyName = "Quantity";
+            Column3.HeaderText = "Số lượng";
+            Column3.MinimumWidth = 8;
+            Column3.Name = "Column3";
+            Column3.Width = 150;
+            // 
+            // Column4
+            // 
+            Column4.DataPropertyName = "Price";
+            Column4.HeaderText = "Đơn giá";
+            Column4.MinimumWidth = 8;
+            Column4.Name = "Column4";
+            Column4.Width = 150;
+            // 
+            // Column5
+            // 
+            Column5.DataPropertyName = "Discount";
+            Column5.HeaderText = "Giảm giá";
+            Column5.MinimumWidth = 8;
+            Column5.Name = "Column5";
+            Column5.Width = 150;
+            // 
+            // Column6
+            // 
+            Column6.DataPropertyName = "Total";
+            Column6.HeaderText = "Thành tiền";
+            Column6.MinimumWidth = 8;
+            Column6.Name = "Column6";
+            Column6.Width = 150;
             // 
             // panel1
             // 
-            panel1.Controls.Add(button1);
-            panel1.Location = new Point(8, 403);
+            panel1.Controls.Add(btn_LuuHoaDon);
+            panel1.Controls.Add(btn_ThemSanPham);
+            panel1.Controls.Add(btn_ThemHoaDon);
+            panel1.Location = new Point(8, 389);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1065, 42);
+            panel1.Size = new Size(1064, 59);
             panel1.TabIndex = 26;
+            // 
+            // btn_LuuHoaDon
+            // 
+            btn_LuuHoaDon.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_LuuHoaDon.ForeColor = Color.FromArgb(0, 117, 214);
+            btn_LuuHoaDon.Location = new Point(424, 5);
+            btn_LuuHoaDon.Name = "btn_LuuHoaDon";
+            btn_LuuHoaDon.Size = new Size(178, 48);
+            btn_LuuHoaDon.TabIndex = 3;
+            btn_LuuHoaDon.Text = "Lưu hoá đơn";
+            btn_LuuHoaDon.UseVisualStyleBackColor = true;
+            // 
+            // btn_ThemSanPham
+            // 
+            btn_ThemSanPham.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_ThemSanPham.ForeColor = Color.FromArgb(0, 117, 214);
+            btn_ThemSanPham.Location = new Point(214, 5);
+            btn_ThemSanPham.Name = "btn_ThemSanPham";
+            btn_ThemSanPham.Size = new Size(178, 48);
+            btn_ThemSanPham.TabIndex = 2;
+            btn_ThemSanPham.Text = "Thêm sản phẩm";
+            btn_ThemSanPham.UseVisualStyleBackColor = true;
+            btn_ThemSanPham.Click += btn_ThemSanPham_Click;
+            // 
+            // btn_ThemHoaDon
+            // 
+            btn_ThemHoaDon.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_ThemHoaDon.ForeColor = Color.FromArgb(0, 117, 214);
+            btn_ThemHoaDon.Location = new Point(5, 5);
+            btn_ThemHoaDon.Name = "btn_ThemHoaDon";
+            btn_ThemHoaDon.Size = new Size(178, 48);
+            btn_ThemHoaDon.TabIndex = 0;
+            btn_ThemHoaDon.Text = "Thêm hoá đơn";
+            btn_ThemHoaDon.UseVisualStyleBackColor = true;
+            btn_ThemHoaDon.Click += btn_ThemHoaDon_Click;
             // 
             // panel2
             // 
@@ -366,77 +475,16 @@
             label8.TabIndex = 13;
             label8.Text = "Tên hàng:";
             // 
-            // label12
+            // label13
             // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.ForeColor = Color.FromArgb(0, 117, 214);
-            label12.Location = new Point(732, 355);
-            label12.Name = "label12";
-            label12.Size = new Size(105, 28);
-            label12.TabIndex = 26;
-            label12.Text = "Tổng tiền:";
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Mã hàng";
-            Column1.MinimumWidth = 8;
-            Column1.Name = "Column1";
-            Column1.Width = 150;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Tên hàng";
-            Column2.MinimumWidth = 8;
-            Column2.Name = "Column2";
-            Column2.Width = 250;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Số lượng";
-            Column3.MinimumWidth = 8;
-            Column3.Name = "Column3";
-            Column3.Width = 150;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Đơn giá";
-            Column4.MinimumWidth = 8;
-            Column4.Name = "Column4";
-            Column4.Width = 150;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Giảm giá";
-            Column5.MinimumWidth = 8;
-            Column5.Name = "Column5";
-            Column5.Width = 150;
-            // 
-            // Column6
-            // 
-            Column6.HeaderText = "Thành tiền";
-            Column6.MinimumWidth = 8;
-            Column6.Name = "Column6";
-            Column6.Width = 150;
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(854, 352);
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new Size(212, 31);
-            textBox3.TabIndex = 26;
-            // 
-            // button1
-            // 
-            button1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.ForeColor = Color.FromArgb(0, 117, 214);
-            button1.Location = new Point(19, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(178, 35);
-            button1.TabIndex = 0;
-            button1.Text = "Thêm hoá đơn";
-            button1.UseVisualStyleBackColor = true;
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.ForeColor = Color.Red;
+            label13.Location = new Point(13, 358);
+            label13.Name = "label13";
+            label13.Size = new Size(210, 21);
+            label13.TabIndex = 29;
+            label13.Text = "Nháy đúp một dòng để xoá";
             // 
             // OrderForm
             // 
@@ -455,7 +503,7 @@
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dtg_OrderDetailList).EndInit();
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -472,7 +520,7 @@
         private Label label4;
         private Label label2;
         private DateTimePicker dateTimePicker1;
-        private TextBox textBox1;
+        private TextBox txt_MaHoaDon;
         private ComboBox comboBox1;
         private TextBox textBox2;
         private GroupBox groupBox2;
@@ -490,15 +538,18 @@
         private TextBox txt_TenHang;
         private Panel panel1;
         private Panel panel2;
-        private DataGridView dataGridView1;
-        private TextBox textBox3;
+        private DataGridView dtg_OrderDetailList;
+        private TextBox txt_TongTien;
         private Label label12;
-        private DataGridViewTextBoxColumn Column1;
+        private Button btn_ThemHoaDon;
+        private Button btn_LuuHoaDon;
+        private Button btn_ThemSanPham;
+        private DataGridViewTextBoxColumn ProductId;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column6;
-        private Button button1;
+        private Label label13;
     }
 }

@@ -1,4 +1,5 @@
-﻿using BFShopBussinessObjects.Utils;
+﻿using BFShopBussinessObjects.Entities;
+using BFShopBussinessObjects.Utils;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -86,6 +87,23 @@ namespace BFShopBussinessObjects
         {
             var pattern = new Regex(@"^[a-zA-Z ]+$");
             return pattern.IsMatch(value);
+        }
+
+        public static bool ContainsLettersOrSpecialCharacters(string input)
+        {
+            return Regex.IsMatch(input, @"[\D]");
+        }
+
+        public static bool CheckProductIDExist(string proID, List<OrderDetail> odList)
+        {
+            foreach (var item in odList)
+            {
+                if (item.ProductId.Equals(proID))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static AppSettings ConfigureAppSettings()

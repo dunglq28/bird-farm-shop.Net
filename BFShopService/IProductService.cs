@@ -13,6 +13,7 @@ namespace BFShopService
         bool Update(string productId, Product product);
         bool Delete(string productId);
         List<Product> Search(string searchValue);
+        List<Product> GetAllProduct();
         Product GetProduct(string productId);
         List<Product> GetProducts();
     }

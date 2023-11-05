@@ -21,6 +21,10 @@ namespace BFShopService
             => _productRepo.Create(product);
         public bool Delete(string productId)
             => _productRepo.Delete(productId);
+
+        public List<Product> GetAllProduct()
+            => _productRepo.GetAllProduct();
+
         public Product GetProduct(string productId)
             => _productRepo.GetProduct(productId);
         public List<Product> GetProducts()
