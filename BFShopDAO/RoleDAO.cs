@@ -35,5 +35,13 @@ namespace BFShopDAO
                 return context.Roles.Where(x => x.RoleDesc.Equals(desc)).FirstOrDefault();
             }
         }
+
+        public List<Role> GetRoles()
+        {
+            using (var context = new Bird_Farm_Shop_PRNContext())
+            {
+                return context.Roles.ToList();
+            }
+        }
     }
 }
