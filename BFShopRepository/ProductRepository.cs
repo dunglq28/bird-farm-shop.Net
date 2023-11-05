@@ -16,6 +16,9 @@ namespace BFShopRepository
         public bool Delete(string productId)
             => ProductDAO.Instance.Delete(productId);
 
+        public List<Product> GetAllProduct()
+            => ProductDAO.Instance.GetAllProduct();
+
         public Product GetProduct(string productId)
             => ProductDAO.Instance.GetProduct(productId);
 

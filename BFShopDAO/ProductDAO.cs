@@ -20,7 +20,7 @@ namespace BFShopDAO
         {
             get
             {
-                lock(objectLock)
+                lock (objectLock)
                 {
                     if (instance == null)
                     {
@@ -33,7 +33,7 @@ namespace BFShopDAO
 
         public bool Create(Product product)
         {
-            using(var context = new Bird_Farm_Shop_PRNContext())
+            using (var context = new Bird_Farm_Shop_PRNContext())
             {
                 context.Products.Add(product);
                 return context.SaveChanges() > 0;
@@ -41,7 +41,7 @@ namespace BFShopDAO
         }
         public bool Update(string productId, Product product)
         {
-            using(var context = new Bird_Farm_Shop_PRNContext())
+            using (var context = new Bird_Farm_Shop_PRNContext())
             {
                 var productEntity = context.Products.Where(x => x.ProductId.Equals(productId))
                                                     .FirstOrDefault();
@@ -64,10 +64,10 @@ namespace BFShopDAO
                 context.SaveChanges();
                 return true;
             }
-            }
+        }
         public bool Delete(string productId)
         {
-            using(var context = new Bird_Farm_Shop_PRNContext())
+            using (var context = new Bird_Farm_Shop_PRNContext())
             {
                 var productEntity = context.Products.Where(x => x.ProductId.Equals(productId))
                                                     .FirstOrDefault();
@@ -97,7 +97,7 @@ namespace BFShopDAO
                                                 || Convert.ToInt32(x.QuantitySold) == num);
                 }
                 // is double number
-                if(double.TryParse(searchValue, out var doubleNum))
+                if (double.TryParse(searchValue, out var doubleNum))
                 {
                     // flag is number
                     isNumber = true;
@@ -106,7 +106,7 @@ namespace BFShopDAO
                 }
 
                 // is string and not a number
-                if(!String.IsNullOrEmpty(searchValue) && !isNumber)
+                if (!String.IsNullOrEmpty(searchValue) && !isNumber)
                 {
                     products = products.Where(x => x.ProductName.Contains(searchValue)
                                                 || x.ProductId.Contains(searchValue)
@@ -137,9 +137,18 @@ namespace BFShopDAO
                 return result;
             }
         }
+
+        public List<Product> GetAllProduct()
+        {
+            using (var context = new Bird_Farm_Shop_PRNContext())
+            {
+                return context.Products.ToList();
+            }
+        }
+
         public Product GetProduct(string productId)
         {
-            using(var context = new Bird_Farm_Shop_PRNContext())
+            using (var context = new Bird_Farm_Shop_PRNContext())
             {
                 return context.Products.Where(x => x.ProductId.Equals(productId))
                                        .Include(x => x.Category)

@@ -9,7 +9,7 @@ namespace BFShopBussinessObjects.Entities
         public string ProductId { get; set; } = null!;
         public int Quantity { get; set; }
         public double Price { get; set; }
-        public int Total { get; set; }
+        public double Total { get; set; }
         public virtual Order Order { get; set; } = null!;
         public virtual Product Product { get; set; } = null!;
     }
