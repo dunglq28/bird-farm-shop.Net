@@ -26,13 +26,13 @@ namespace PRN211_BirdFarmShop
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
-            cbx_MaHang.DataSource = _productService.GetAllProduct();
+            cbx_MaHang.DataSource = _productService.GetProducts();
             cbx_MaHang.DisplayMember = "ProductId";
             cbx_MaHang.ValueMember = "ProductId";
         }
         private void cbx_MaHang_SelectedValueChanged(object sender, EventArgs e)
         {
-            Product pro = _productService.GetProductByProductID(cbx_MaHang.SelectedValue.ToString());
+            Product pro = _productService.GetProduct(cbx_MaHang.SelectedValue.ToString());
             if (pro is not null)
             {
                 txt_TenHang.Text = pro.ProductName;

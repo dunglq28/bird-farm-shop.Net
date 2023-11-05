@@ -10,20 +10,24 @@ namespace BFShopService
 {
     public class ProductService : IProductService
     {
-        private readonly IProductRepository _repository;
+        private readonly IProductRepository _productRepo;
+
         public ProductService()
         {
-            _repository = new ProductRepository();
-        }
-        public List<Product> GetAllProduct()
-        {
-            return _repository.GetAllProduct();
+            _productRepo = new ProductRepository();
         }
 
-        public Product GetProductByProductID(string proID)
-        {
-            return _repository.GetProductByProductID(proID);
-        }
-
+        public bool Create(Product product)
+            => _productRepo.Create(product);
+        public bool Delete(string productId)
+            => _productRepo.Delete(productId);
+        public Product GetProduct(string productId)
+            => _productRepo.GetProduct(productId);
+        public List<Product> GetProducts()
+            => _productRepo.GetProducts();
+        public List<Product> Search(string searchValue)
+            => _productRepo.Search(searchValue);
+        public bool Update(string productId, Product product)
+            => _productRepo.Update(productId, product);
     }
 }

@@ -9,8 +9,11 @@ namespace BFShopService
 {
     public interface IProductService
     {
-        List<Product> GetAllProduct();
-
-        Product GetProductByProductID(string proID);
+        bool Create(Product product);
+        bool Update(string productId, Product product);
+        bool Delete(string productId);
+        List<Product> Search(string searchValue);
+        Product GetProduct(string productId);
+        List<Product> GetProducts();
     }
 }
