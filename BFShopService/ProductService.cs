@@ -16,7 +16,7 @@ namespace BFShopService
         {
             _productRepo = new ProductRepository();
         }
-        
+
         public bool Create(Product product)
             => _productRepo.Create(product);
         public bool Delete(string productId)

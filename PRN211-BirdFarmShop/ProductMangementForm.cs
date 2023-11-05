@@ -159,6 +159,7 @@ namespace PRN211_BirdFarmShop
             dgv_Product.Columns["Characteristics"].HeaderText = "Đặc trưng";
             dgv_Product.Columns["Status"].HeaderText = "Trạng thái";
             dgv_Product.Columns["Detail"].HeaderText = "Mô tả";
+            dgv_Product.Columns["Discount"].HeaderText = "Giảm giá";
 
             for (int i = 0; i <= 10; ++i)
             {
@@ -222,7 +223,8 @@ namespace PRN211_BirdFarmShop
                                               x.Price,
                                               x.Characteristics,
                                               x.Status,
-                                              x.Detail
+                                              x.Detail,
+                                              x.Discount
                                           })
                                           .ToList();
 
@@ -257,6 +259,7 @@ namespace PRN211_BirdFarmShop
             var Characteristics = tb_Chacteristic.Text.Trim();
             var status = tb_Status.Text.Trim();
             var detail = tb_Detail.Text.Trim();
+            var coupon = Convert.ToDouble(tb_Coupon.Text.Trim());
 
             // generate product model 
             var product = new Product()
@@ -274,7 +277,8 @@ namespace PRN211_BirdFarmShop
                 Status = status,
                 DateCreated = createDate,
                 Detail = detail,
-                Image = _birdImage
+                Image = _birdImage,
+                Discount = coupon
             };
 
             // create product
@@ -324,10 +328,12 @@ namespace PRN211_BirdFarmShop
             var dateFormat = Convert.ToDateTime(dtp_CreateDate.Text).ToString("yyyy-MM-dd");
             var createDate = DateTime.ParseExact(dateFormat,
                     "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            var price = Convert.ToDouble(tb_Price.Text.Trim());
+            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+            var price = Double.Parse(tb_Price.Text.Trim(), cul);
             var Characteristics = tb_Chacteristic.Text.Trim();
             var status = tb_Status.Text.Trim();
             var detail = tb_Detail.Text.Trim();
+            var coupon = Convert.ToDouble(tb_Coupon.Text.Trim());
 
             // get product
             var productEntity = _productService.GetProduct(productId);
@@ -358,7 +364,8 @@ namespace PRN211_BirdFarmShop
                 Status = status,
                 DateCreated = createDate,
                 Detail = detail,
-                Image = _birdImage
+                Image = _birdImage,
+                Discount = coupon
             };
 
             // update product
@@ -406,10 +413,14 @@ namespace PRN211_BirdFarmShop
                 tb_Gender.Text = dgv_Product.Rows[e.RowIndex].Cells[4].Value.ToString();
                 tb_AvailableQuantity.Text = dgv_Product.Rows[e.RowIndex].Cells[5].Value.ToString();
                 tb_SoldQuantity.Text = dgv_Product.Rows[e.RowIndex].Cells[6].Value.ToString();
-                tb_Price.Text = dgv_Product.Rows[e.RowIndex].Cells[9].Value.ToString();
                 tb_Chacteristic.Text = dgv_Product.Rows[e.RowIndex].Cells[10].Value.ToString();
                 tb_Status.Text = dgv_Product.Rows[e.RowIndex].Cells[11].Value.ToString();
                 tb_Detail.Text = dgv_Product.Rows[e.RowIndex].Cells[12].Value.ToString();
+
+                // price format
+                CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
+                var price = dgv_Product.Rows[e.RowIndex].Cells[9].Value.ToString();
+                tb_Price.Text = double.Parse(price).ToString("#,###", cul.NumberFormat);
 
                 // datetime format
                 var dateFormat = Convert.ToDateTime(dgv_Product.Rows[e.RowIndex].Cells[8].Value).ToString("yyyy-MM-dd");
@@ -422,6 +433,7 @@ namespace PRN211_BirdFarmShop
                 cb_Category.SelectedValue = categories.Where(x => x.CategoryName.Equals(categoryName))
                                                       .Select(x => x.CategoryId)
                                                       .FirstOrDefault();
+                tb_Coupon.Text = dgv_Product.Rows[e.RowIndex].Cells[13].Value.ToString();
 
                 // load image
                 var product = _productService.GetProduct(tb_ProductId.Text);
@@ -519,9 +531,9 @@ namespace PRN211_BirdFarmShop
                 x.Price,
                 x.Characteristics,
                 x.Status,
-                x.Detail
-            })
-                        .ToList();
+                x.Detail,
+                x.Discount
+            }).ToList();
 
             // binding source
             var bindingSource = new BindingSource();

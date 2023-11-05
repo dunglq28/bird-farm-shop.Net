@@ -26,7 +26,7 @@ namespace BFShopDAO
                     {
                         instance = new ProductDAO();
                     }
-                    return instance; 
+                    return instance;
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace BFShopDAO
                 context.SaveChanges();
                 return true;
             }
-        }
+            }
         public bool Delete(string productId)
         {
             using(var context = new Bird_Farm_Shop_PRNContext())
@@ -118,7 +118,7 @@ namespace BFShopDAO
                                                 || x.Status.Contains(searchValue)
                                                 || x.Category.CategoryName.Contains(searchValue));
                 }
-                
+
                 var result = products.ToList();
 
                 // is datetime

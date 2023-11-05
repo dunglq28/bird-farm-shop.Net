@@ -80,6 +80,11 @@
             btn_Close = new Button();
             tb_ProductId = new TextBox();
             dtp_CreateDate = new DateTimePicker();
+            panel15 = new Panel();
+            pictureBox15 = new PictureBox();
+            tb_Coupon = new TextBox();
+            pictureBox16 = new PictureBox();
+            pictureBox17 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pic_Avatar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pic_Camera).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -97,6 +102,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgv_Product).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox14).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox15).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox16).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox17).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -187,7 +195,7 @@
             // tb_Chacteristic
             // 
             tb_Chacteristic.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Chacteristic.Location = new Point(404, 202);
+            tb_Chacteristic.Location = new Point(404, 253);
             tb_Chacteristic.Name = "tb_Chacteristic";
             tb_Chacteristic.PlaceholderText = "Đặc trưng";
             tb_Chacteristic.Size = new Size(197, 30);
@@ -200,16 +208,16 @@
             tb_Detail.Multiline = true;
             tb_Detail.Name = "tb_Detail";
             tb_Detail.PlaceholderText = "Mô tả";
-            tb_Detail.Size = new Size(197, 90);
+            tb_Detail.Size = new Size(197, 132);
             tb_Detail.TabIndex = 22;
             // 
             // tb_Status
             // 
             tb_Status.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Status.Location = new Point(404, 248);
+            tb_Status.Location = new Point(77, 401);
             tb_Status.Name = "tb_Status";
             tb_Status.PlaceholderText = "Trạng thái";
-            tb_Status.Size = new Size(197, 30);
+            tb_Status.Size = new Size(219, 30);
             tb_Status.TabIndex = 24;
             // 
             // pic_Avatar
@@ -338,7 +346,7 @@
             // pictureBox11
             // 
             pictureBox11.Image = (Image)resources.GetObject("pictureBox11.Image");
-            pictureBox11.Location = new Point(358, 196);
+            pictureBox11.Location = new Point(358, 247);
             pictureBox11.Name = "pictureBox11";
             pictureBox11.Size = new Size(30, 35);
             pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
@@ -348,7 +356,7 @@
             // pictureBox12
             // 
             pictureBox12.Image = (Image)resources.GetObject("pictureBox12.Image");
-            pictureBox12.Location = new Point(358, 243);
+            pictureBox12.Location = new Point(30, 399);
             pictureBox12.Name = "pictureBox12";
             pictureBox12.Size = new Size(30, 35);
             pictureBox12.SizeMode = PictureBoxSizeMode.Zoom;
@@ -501,7 +509,7 @@
             // 
             panel12.BackColor = Color.FromArgb(0, 117, 214);
             panel12.ForeColor = Color.FromArgb(0, 117, 214);
-            panel12.Location = new Point(356, 234);
+            panel12.Location = new Point(356, 285);
             panel12.Name = "panel12";
             panel12.Size = new Size(245, 3);
             panel12.TabIndex = 48;
@@ -510,7 +518,7 @@
             // 
             panel13.BackColor = Color.FromArgb(0, 117, 214);
             panel13.ForeColor = Color.FromArgb(0, 117, 214);
-            panel13.Location = new Point(356, 280);
+            panel13.Location = new Point(358, 233);
             panel13.Name = "panel13";
             panel13.Size = new Size(245, 3);
             panel13.TabIndex = 48;
@@ -521,7 +529,7 @@
             panel14.ForeColor = Color.FromArgb(0, 117, 214);
             panel14.Location = new Point(356, 331);
             panel14.Name = "panel14";
-            panel14.Size = new Size(40, 3);
+            panel14.Size = new Size(35, 3);
             panel14.TabIndex = 48;
             // 
             // btn_Add
@@ -616,12 +624,69 @@
             dtp_CreateDate.Size = new Size(200, 29);
             dtp_CreateDate.TabIndex = 58;
             // 
+            // panel15
+            // 
+            panel15.BackColor = Color.FromArgb(0, 117, 214);
+            panel15.ForeColor = Color.FromArgb(0, 117, 214);
+            panel15.Location = new Point(30, 437);
+            panel15.Name = "panel15";
+            panel15.Size = new Size(267, 3);
+            panel15.TabIndex = 54;
+            // 
+            // pictureBox15
+            // 
+            pictureBox15.Image = (Image)resources.GetObject("pictureBox15.Image");
+            pictureBox15.Location = new Point(358, 196);
+            pictureBox15.Name = "pictureBox15";
+            pictureBox15.Size = new Size(30, 35);
+            pictureBox15.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox15.TabIndex = 53;
+            pictureBox15.TabStop = false;
+            // 
+            // tb_Coupon
+            // 
+            tb_Coupon.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_Coupon.Location = new Point(403, 202);
+            tb_Coupon.Name = "tb_Coupon";
+            tb_Coupon.PlaceholderText = "Giám giá";
+            tb_Coupon.Size = new Size(198, 30);
+            tb_Coupon.TabIndex = 52;
+            // 
+            // pictureBox16
+            // 
+            pictureBox16.BackColor = SystemColors.Window;
+            pictureBox16.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox16.Image = (Image)resources.GetObject("pictureBox16.Image");
+            pictureBox16.Location = new Point(570, 207);
+            pictureBox16.Name = "pictureBox16";
+            pictureBox16.Size = new Size(31, 25);
+            pictureBox16.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox16.TabIndex = 59;
+            pictureBox16.TabStop = false;
+            // 
+            // pictureBox17
+            // 
+            pictureBox17.BackColor = SystemColors.Window;
+            pictureBox17.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox17.Image = (Image)resources.GetObject("pictureBox17.Image");
+            pictureBox17.Location = new Point(570, 155);
+            pictureBox17.Name = "pictureBox17";
+            pictureBox17.Size = new Size(31, 29);
+            pictureBox17.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox17.TabIndex = 60;
+            pictureBox17.TabStop = false;
+            // 
             // ProductMangementForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(994, 780);
+            Controls.Add(pictureBox17);
+            Controls.Add(pictureBox16);
+            Controls.Add(panel15);
+            Controls.Add(pictureBox15);
             Controls.Add(dtp_CreateDate);
+            Controls.Add(tb_Coupon);
             Controls.Add(btn_Close);
             Controls.Add(btn_Reset);
             Controls.Add(btn_Update);
@@ -693,6 +758,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox13).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgv_Product).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox14).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox15).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox16).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox17).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -749,5 +817,10 @@
         private Button btn_Close;
         private TextBox tb_ProductId;
         private DateTimePicker dtp_CreateDate;
+        private Panel panel15;
+        private PictureBox pictureBox15;
+        private TextBox tb_Coupon;
+        private PictureBox pictureBox16;
+        private PictureBox pictureBox17;
     }
 }
