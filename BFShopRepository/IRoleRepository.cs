@@ -10,5 +10,7 @@ namespace BFShopRepository
     public interface IRoleRepository
     {
         Role GetByDesc(string desc);
+
+        List<Role> GetRoles();
     }
 }

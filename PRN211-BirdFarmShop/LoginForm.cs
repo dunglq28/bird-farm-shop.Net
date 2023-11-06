@@ -63,6 +63,8 @@ namespace PRN211_BirdFarmShop
                     {
                         case Constants.IsAdmin:
                             ///TODO: Account management form
+                            AdminForm admin = new AdminForm();
+                            admin.Show();
                             this.Hide();
                             break;
                         case Constants.IsManager:
