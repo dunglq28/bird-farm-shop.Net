@@ -10,9 +10,25 @@ namespace BFShopRepository
 {
     public class ProductRepository : IProductRepository
     {
-        public List<Product> GetAllProduct() => ProductDAO.Instance.GetAllProduct();
+        public bool Create(Product product)
+            => ProductDAO.Instance.Create(product);
 
-        public Product GetProductByProductID(string proID) => ProductDAO.Instance.GetProductByProductID(proID);
+        public bool Delete(string productId)
+            => ProductDAO.Instance.Delete(productId);
 
+        public List<Product> GetAllProduct()
+            => ProductDAO.Instance.GetAllProduct();
+
+        public Product GetProduct(string productId)
+            => ProductDAO.Instance.GetProduct(productId);
+
+        public List<Product> GetProducts()
+            => ProductDAO.Instance.GetProducts();
+
+        public List<Product> Search(string searchValue)
+            => ProductDAO.Instance.Search(searchValue);
+
+        public bool Update(string productId, Product product)
+            => ProductDAO.Instance.Update(productId, product);
     }
 }

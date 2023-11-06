@@ -9,8 +9,12 @@ namespace BFShopRepository
 {
     public interface IProductRepository
     {
+        bool Create(Product product);
+        bool Update(string productId, Product product);
+        bool Delete(string productId);
+        List<Product> Search(string searchValue);
         List<Product> GetAllProduct();
-
-        Product GetProductByProductID(string proID);
+        Product GetProduct(string productId);
+        List<Product> GetProducts();
     }
 }
