@@ -79,8 +79,12 @@ namespace BFShopDAO
                 if (account is not null)
                 {
                     accountEntity.Fullname = account.Fullname;
+                    accountEntity.Email = account.Email;
                     accountEntity.Password = account.Password;
                     accountEntity.RoleId = account.RoleId;
+                    accountEntity.Street = account.Street;
+                    accountEntity.City = account.City;
+                    accountEntity.Phone = account.Phone;
 
                     context.SaveChanges();
                     return true;

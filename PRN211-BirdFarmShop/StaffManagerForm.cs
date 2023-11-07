@@ -519,6 +519,16 @@ namespace PRN211_BirdFarmShop
             // custom font
             UpdateFont();
         }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox4_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

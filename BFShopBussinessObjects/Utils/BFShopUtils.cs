@@ -1,4 +1,5 @@
-﻿using BFShopBussinessObjects.Utils;
+﻿using BFShopBussinessObjects.Entities;
+using BFShopBussinessObjects.Utils;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;

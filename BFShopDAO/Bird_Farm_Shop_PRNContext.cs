@@ -134,21 +134,20 @@ namespace BFShopBussinessObjects.Entities
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
-                entity.ToTable("OrderDetail");
+                entity.HasKey(e => new { e.OrderId, e.ProductId })
+                    .HasName("PK__OrderDet__8D19AE47420F8175");
 
-                entity.Property(e => e.OrderDetailId)
-                    .HasMaxLength(100)
-                    .HasColumnName("order_detail_id");
+                entity.ToTable("OrderDetail");
 
                 entity.Property(e => e.OrderId)
                     .HasMaxLength(100)
                     .HasColumnName("order_id");
 
-                entity.Property(e => e.Price).HasColumnName("price");
-
                 entity.Property(e => e.ProductId)
                     .HasMaxLength(50)
                     .HasColumnName("ProductID");
+
+                entity.Property(e => e.Price).HasColumnName("price");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
 
@@ -163,6 +162,7 @@ namespace BFShopBussinessObjects.Entities
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetail_ProductId");
             });
 

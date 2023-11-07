@@ -65,6 +65,8 @@ namespace PRN211_BirdFarmShop
                             StaffManagerForm staffManagerForm = new StaffManagerForm();
                             staffManagerForm.Show();
                             ///TODO: Account management form
+                            AdminForm admin = new AdminForm();
+                            admin.Show();
                             this.Hide();
                             break;
                         case Constants.IsManager:

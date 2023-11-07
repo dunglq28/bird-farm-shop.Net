@@ -1,4 +1,4 @@
-﻿using BFShopBussinessObjects.Entities;
+﻿using BFShopDAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace BFShopRepository
 {
-    public interface IRoleRepository
+    public class OrderRepository : IOrderRepository
     {
-        Role GetByDesc(string desc);
-
-        List<Role> GetRoles();
+        public string createOrderID() => OrderDAO.Instance.createOrderID();
+       
     }
 }
