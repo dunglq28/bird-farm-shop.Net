@@ -65,7 +65,6 @@ namespace BFShopBussinessObjects
             return regex.IsMatch(password);
         }
 
-
         /// <summary>
         /// Check date valid
         /// </summary>
@@ -83,6 +82,22 @@ namespace BFShopBussinessObjects
                 return false;
         }
 
+        public static bool IsNotNumericString(string value)
+        {
+            var pattern = new Regex(@"^[a-zA-Z ]+$");
+            return pattern.IsMatch(value);
+        }
+
+        public static int CalculateAge(DateTime dateOfBirth)
+        {
+            int age = 0;
+            age = DateTime.Now.Year - dateOfBirth.Year;
+            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
+                age = age - 1;
+
+            return age;
+        }
+
         public static AppSettings ConfigureAppSettings()
         {
             IConfiguration configuration = new ConfigurationBuilder()
@@ -92,5 +107,7 @@ namespace BFShopBussinessObjects
 
             return configuration.GetSection("AppSettings").Get<AppSettings>();
         }
+
+
     }
 }

@@ -11,7 +11,7 @@ namespace BFShopBussinessObjects.Entities
         }
 
         public int RoleId { get; set; }
-        public string RoleDesc { get; set; }
+        public string? RoleDesc { get; set; }
 
         public virtual ICollection<Account> Accounts { get; set; }
     }
