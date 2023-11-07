@@ -16,5 +16,7 @@ namespace BFShopService
         Account GetAccount(string? email);
         List<Account> GetAccounts();
         List<Account> SearchAccount(string searchValue);
+        public List<Account> getAllAccountByRole(String RoleDecs);
+        public List<Account> SearchAccountInRole(String searchValue, String RoleDecs);
     }
 }

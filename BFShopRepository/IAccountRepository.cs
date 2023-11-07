@@ -16,5 +16,7 @@ namespace BFShopRepository
         Account GetAccount(string? email);
         List<Account> GetAccounts();
         List<Account> SearchAccount(string searchValue);
+        public List<Account> getAllAccountByRole(String RoleDecs);
+        public List<Account> SearchAccountInRole(string searchValue, string RoleDecs);
     }
 }

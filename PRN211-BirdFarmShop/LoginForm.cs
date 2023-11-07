@@ -62,17 +62,25 @@ namespace PRN211_BirdFarmShop
                     switch (role)
                     {
                         case Constants.IsAdmin:
+                            StaffManagerForm staffManagerForm = new StaffManagerForm();
+                            staffManagerForm.Show();
                             ///TODO: Account management form
                             AdminForm admin = new AdminForm();
                             admin.Show();
                             this.Hide();
                             break;
                         case Constants.IsManager:
+                            StaffManagerForm staffManagerForm1 = new StaffManagerForm();
+                            staffManagerForm1.Show();
                             ///TODO: Product, Order management form
                             this.Hide();
                             break;
                         case Constants.IsCustomer:
                             ///TODO: Customer form (View products, View order history, Order products, Privacy info,...)
+                            this.Hide();
+                            break;
+                        case Constants.IsStaff:
+                            ///TODO: staff form (View products, View order history, Order products, Privacy info,...)
                             this.Hide();
                             break;
                         default:

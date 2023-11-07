@@ -89,21 +89,14 @@ namespace BFShopBussinessObjects
             return pattern.IsMatch(value);
         }
 
-        public static bool ContainsLettersOrSpecialCharacters(string input)
+        public static int CalculateAge(DateTime dateOfBirth)
         {
-            return Regex.IsMatch(input, @"[\D]");
-        }
+            int age = 0;
+            age = DateTime.Now.Year - dateOfBirth.Year;
+            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
+                age = age - 1;
 
-        public static bool CheckProductIDExist(string proID, List<OrderDetail> odList)
-        {
-            foreach (var item in odList)
-            {
-                if (item.ProductId.Equals(proID))
-                {
-                    return true;
-                }
-            }
-            return false;
+            return age;
         }
 
         public static AppSettings ConfigureAppSettings()
@@ -115,5 +108,7 @@ namespace BFShopBussinessObjects
 
             return configuration.GetSection("AppSettings").Get<AppSettings>();
         }
+
+
     }
 }

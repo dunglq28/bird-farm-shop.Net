@@ -1,5 +1,5 @@
 ﻿using BFShopBussinessObjects.Entities;
-using BFShopDAO.Entities;
+using BFShopBussinessObjects.Utils;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -123,12 +123,46 @@ namespace BFShopDAO
                 // filter 
                 var accounts = context.Accounts.AsQueryable();
 
-                accounts = accounts.Where(x => x.Email.Contains(searchValue)
+                accounts = accounts.Include(a => a.Role).Where(x => x.Email.Contains(searchValue)
                                             || x.Fullname.Contains(searchValue));
                 // try parse int
                 if (int.TryParse(searchValue, out var memberRole))
                 {
                     var result = context.Accounts.ToList();
+                    result = result.Where(x => Convert.ToInt32(x.RoleId) == memberRole).ToList();
+                    return result;
+                }
+
+                return accounts.ToList();
+            }
+        }
+
+        public List<Account> getAccountByRole(String RoleDecs)
+        {
+            var dbcontext = new Bird_Farm_Shop_PRNContext();
+            return dbcontext.Accounts.Include(a => a.Role).
+                Where(account => account.Role.RoleDesc.Equals(RoleDecs)).ToList();
+        }
+
+        public List<Account> SearchAccountInRole(string searchValue, string RoleDecs)
+        {
+            using (var context = new Bird_Farm_Shop_PRNContext())
+            {
+                if (String.IsNullOrEmpty(searchValue))
+                {
+                    return context.Accounts.Include(a => a.Role).ToList();
+                }
+
+                // filter 
+                var accounts = context.Accounts.Include(x => x.Role).AsQueryable();
+
+                accounts = accounts.Include(a => a.Role).Where(x => (x.Email.Contains(searchValue)
+                                            || x.Fullname.Contains(searchValue))
+                                            && x.Role.RoleDesc.Equals(RoleDecs));
+                // try parse int
+                if (int.TryParse(searchValue, out var memberRole))
+                {
+                    var result = context.Accounts.Include(a => a.Role).ToList();
                     result = result.Where(x => Convert.ToInt32(x.RoleId) == memberRole).ToList();
                     return result;
                 }

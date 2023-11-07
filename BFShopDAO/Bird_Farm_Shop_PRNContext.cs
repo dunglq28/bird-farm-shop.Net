@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using BFShopBussinessObjects.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 
-namespace BFShopDAO.Entities
+namespace BFShopBussinessObjects.Entities
 {
     public partial class Bird_Farm_Shop_PRNContext : DbContext
     {
@@ -43,12 +42,13 @@ namespace BFShopDAO.Entities
             return config["ConnectionStrings:connStr"];
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(entity =>
             {
                 entity.HasKey(e => e.Email)
-                    .HasName("PK__Account__AB6E61657C0B38EC");
+                    .HasName("PK__Account__AB6E616515D330FB");
 
                 entity.ToTable("Account");
 
