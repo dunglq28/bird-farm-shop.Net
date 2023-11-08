@@ -14,6 +14,7 @@ namespace BFShopRepository
         bool Delete(string email);
         Account CheckLogin(string username, string password);
         Account GetAccount(string? email);
+        Account GetAccountCusByPhone(string? phone);
         List<Account> GetAccounts();
         List<Account> SearchAccount(string searchValue);
         public List<Account> getAllAccountByRole(String RoleDecs);

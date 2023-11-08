@@ -32,8 +32,12 @@
             label1 = new Label();
             splitContainer1 = new SplitContainer();
             groupBox1 = new GroupBox();
-            comboBox1 = new ComboBox();
-            textBox2 = new TextBox();
+            txt_TenKhachHang = new TextBox();
+            label16 = new Label();
+            cbx_SoDienThoai = new ComboBox();
+            label15 = new Label();
+            cbx_EmailNhanVien = new ComboBox();
+            txt_TenNhanVien = new TextBox();
             dateTimePicker1 = new DateTimePicker();
             txt_MaHoaDon = new TextBox();
             label3 = new Label();
@@ -47,7 +51,7 @@
             dtg_OrderDetailList = new DataGridView();
             ProductId = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
+            Quantity = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
             Column5 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
@@ -113,8 +117,12 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(comboBox1);
-            groupBox1.Controls.Add(textBox2);
+            groupBox1.Controls.Add(txt_TenKhachHang);
+            groupBox1.Controls.Add(label16);
+            groupBox1.Controls.Add(cbx_SoDienThoai);
+            groupBox1.Controls.Add(label15);
+            groupBox1.Controls.Add(cbx_EmailNhanVien);
+            groupBox1.Controls.Add(txt_TenNhanVien);
             groupBox1.Controls.Add(dateTimePicker1);
             groupBox1.Controls.Add(txt_MaHoaDon);
             groupBox1.Controls.Add(label3);
@@ -129,20 +137,61 @@
             groupBox1.Text = "Thông tin chung";
             groupBox1.ChangeUICues += OrderForm_Load;
             // 
-            // comboBox1
+            // txt_TenKhachHang
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(214, 114);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(266, 33);
-            comboBox1.TabIndex = 9;
+            txt_TenKhachHang.Location = new Point(754, 74);
+            txt_TenKhachHang.Name = "txt_TenKhachHang";
+            txt_TenKhachHang.Size = new Size(266, 31);
+            txt_TenKhachHang.TabIndex = 13;
             // 
-            // textBox2
+            // label16
             // 
-            textBox2.Location = new Point(214, 154);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(266, 31);
-            textBox2.TabIndex = 8;
+            label16.AutoSize = true;
+            label16.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label16.ForeColor = Color.FromArgb(0, 117, 214);
+            label16.Location = new Point(582, 80);
+            label16.Name = "label16";
+            label16.Size = new Size(156, 28);
+            label16.TabIndex = 12;
+            label16.Text = "Tên khách hàng";
+            // 
+            // cbx_SoDienThoai
+            // 
+            cbx_SoDienThoai.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbx_SoDienThoai.FormattingEnabled = true;
+            cbx_SoDienThoai.Location = new Point(754, 30);
+            cbx_SoDienThoai.Name = "cbx_SoDienThoai";
+            cbx_SoDienThoai.Size = new Size(266, 33);
+            cbx_SoDienThoai.TabIndex = 11;
+            cbx_SoDienThoai.SelectedValueChanged += cbx_SoDienThoai_SelectedValueChanged;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.ForeColor = Color.FromArgb(0, 117, 214);
+            label15.Location = new Point(582, 37);
+            label15.Name = "label15";
+            label15.Size = new Size(138, 28);
+            label15.TabIndex = 10;
+            label15.Text = "Số điện thoại:";
+            // 
+            // cbx_EmailNhanVien
+            // 
+            cbx_EmailNhanVien.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbx_EmailNhanVien.FormattingEnabled = true;
+            cbx_EmailNhanVien.Location = new Point(214, 114);
+            cbx_EmailNhanVien.Name = "cbx_EmailNhanVien";
+            cbx_EmailNhanVien.Size = new Size(266, 33);
+            cbx_EmailNhanVien.TabIndex = 9;
+            cbx_EmailNhanVien.SelectedValueChanged += cbx_EmailNhanVien_SelectedValueChanged;
+            // 
+            // txt_TenNhanVien
+            // 
+            txt_TenNhanVien.Location = new Point(214, 154);
+            txt_TenNhanVien.Name = "txt_TenNhanVien";
+            txt_TenNhanVien.Size = new Size(266, 31);
+            txt_TenNhanVien.TabIndex = 8;
             // 
             // dateTimePicker1
             // 
@@ -189,9 +238,9 @@
             label4.ForeColor = Color.FromArgb(0, 117, 214);
             label4.Location = new Point(38, 119);
             label4.Name = "label4";
-            label4.Size = new Size(141, 28);
+            label4.Size = new Size(161, 28);
             label4.TabIndex = 3;
-            label4.Text = "Mã nhân viên:";
+            label4.Text = "Email nhân viên:";
             // 
             // label2
             // 
@@ -255,7 +304,7 @@
             dtg_OrderDetailList.BackgroundColor = Color.White;
             dtg_OrderDetailList.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             dtg_OrderDetailList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtg_OrderDetailList.Columns.AddRange(new DataGridViewColumn[] { ProductId, Column2, Column3, Column4, Column5, Column6 });
+            dtg_OrderDetailList.Columns.AddRange(new DataGridViewColumn[] { ProductId, Column2, Quantity, Column4, Column5, Column6 });
             dtg_OrderDetailList.GridColor = SystemColors.ControlLight;
             dtg_OrderDetailList.Location = new Point(6, 146);
             dtg_OrderDetailList.Name = "dtg_OrderDetailList";
@@ -281,13 +330,13 @@
             Column2.Name = "Column2";
             Column2.Width = 250;
             // 
-            // Column3
+            // Quantity
             // 
-            Column3.DataPropertyName = "Quantity";
-            Column3.HeaderText = "Số lượng";
-            Column3.MinimumWidth = 8;
-            Column3.Name = "Column3";
-            Column3.Width = 150;
+            Quantity.DataPropertyName = "Quantity";
+            Quantity.HeaderText = "Số lượng";
+            Quantity.MinimumWidth = 8;
+            Quantity.Name = "Quantity";
+            Quantity.Width = 150;
             // 
             // Column4
             // 
@@ -555,8 +604,8 @@
         private Label label2;
         private DateTimePicker dateTimePicker1;
         private TextBox txt_MaHoaDon;
-        private ComboBox comboBox1;
-        private TextBox textBox2;
+        private ComboBox cbx_EmailNhanVien;
+        private TextBox txt_TenNhanVien;
         private GroupBox groupBox2;
         private ComboBox cbx_MaHang;
         private Label label6;
@@ -587,5 +636,10 @@
         private DataGridViewTextBoxColumn Column6;
         private TextBox textBox1;
         private Label label14;
+        private DataGridViewTextBoxColumn Quantity;
+        private TextBox txt_TenKhachHang;
+        private Label label16;
+        private ComboBox cbx_SoDienThoai;
+        private Label label15;
     }
 }

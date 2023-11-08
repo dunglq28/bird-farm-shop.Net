@@ -1,5 +1,6 @@
 ﻿using BFShopBussinessObjects;
 using BFShopBussinessObjects.Entities;
+using BFShopBussinessObjects.Utils;
 using BFShopRepository;
 using BFShopService;
 using Newtonsoft.Json.Linq;
@@ -21,6 +22,7 @@ namespace PRN211_BirdFarmShop
     {
         private IProductService _productService;
         private IOrderService _orderService;
+        private IAccountService _accountService;
         List<OrderDetail> orderDetailList = new List<OrderDetail>();
         double totalOrder = 0;
 
@@ -29,12 +31,19 @@ namespace PRN211_BirdFarmShop
             InitializeComponent();
             _productService = new ProductService();
             _orderService = new OrderService();
+            _accountService = new AccountService();
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
             btn_ThemSanPham.Enabled = false;
             btn_LuuHoaDon.Enabled = false;
+            cbx_EmailNhanVien.DataSource = _accountService.getAllAccountByRole(Constants.IsStaff);
+            cbx_EmailNhanVien.DisplayMember = "Email";
+            cbx_EmailNhanVien.ValueMember = "Email";
+            cbx_SoDienThoai.DataSource = _accountService.getAllAccountByRole(Constants.IsCustomer);
+            cbx_SoDienThoai.DisplayMember = "Phone";
+            cbx_SoDienThoai.ValueMember = "Phone";
         }
         private void cbx_MaHang_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -46,6 +55,32 @@ namespace PRN211_BirdFarmShop
                 txt_SoLuong.Text = "1";
                 txt_GiamGia.Text = "0";
                 txt_ThanhTien.Text = String.Format("{0:0,00}", pro.Price);
+            }
+        }
+
+        private void cbx_EmailNhanVien_SelectedValueChanged(object sender, EventArgs e)
+        {
+            Account acc = null;
+            if (cbx_EmailNhanVien.SelectedValue is not null)
+            {
+                acc = _accountService.GetAccount(cbx_EmailNhanVien.SelectedValue.ToString());
+            }
+            if (acc is not null)
+            {
+                txt_TenNhanVien.Text = acc.Fullname;
+            }
+        }
+
+        private void cbx_SoDienThoai_SelectedValueChanged(object sender, EventArgs e)
+        {
+            Account acc = null;
+            if (cbx_SoDienThoai.SelectedValue is not null)
+            {
+                acc = _accountService.GetAccountCusByPhone(cbx_SoDienThoai.SelectedValue.ToString());
+            }
+            if (acc is not null)
+            {
+                txt_TenKhachHang.Text = acc.Fullname;
             }
         }
 
@@ -119,29 +154,48 @@ namespace PRN211_BirdFarmShop
                 MessageBox.Show("Mã hàng này đã có, bạn phải nhập mã khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            Product pro = _productService.GetProduct(cbx_MaHang.SelectedValue.ToString());
+            int qtyBuy = Convert.ToInt32(txt_SoLuong.Text.ToString());
+            if (qtyBuy > pro.QuantityAvailable)
+            {
+                MessageBox.Show("Sản phẩm này chỉ còn " + pro.QuantityAvailable, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.Product = new Product();
             orderDetail.OrderId = txt_MaHoaDon.Text.ToString();
             orderDetail.ProductId = cbx_MaHang.SelectedValue.ToString();
             orderDetail.Product.ProductName = txt_TenHang.Text.ToString();
-            orderDetail.Quantity = Convert.ToInt32(txt_SoLuong.Text.ToString());
+            orderDetail.Quantity = qtyBuy;
             orderDetail.Price = Convert.ToDouble(txt_DonGia.Text.ToString());
             orderDetail.Total = Convert.ToDouble(txt_ThanhTien.Text.ToString());
             orderDetailList.Add(orderDetail);
             loadDataGridView();
             totalOrder += orderDetail.Total;
             txt_TongTien.Text = string.Format("{0:0,00}", totalOrder);
-
+            pro.QuantityAvailable = pro.QuantityAvailable - qtyBuy;
+            pro.QuantitySold = pro.QuantitySold + qtyBuy;
+            _productService.Update(pro.ProductId, pro);
         }
 
         private void dtg_OrderDetailList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
-            string productId = dtg_OrderDetailList.Rows[rowIndex].Cells["ProductId"].Value.ToString();
-            totalOrder -= orderDetailList.Find(item => item.ProductId.Equals(productId)).Total;
-            txt_TongTien.Text = string.Format("{0:0,00}", totalOrder);
-            orderDetailList.RemoveAll(item => item.ProductId.Equals(productId));
-            loadDataGridView();
+            if (dtg_OrderDetailList.Rows[rowIndex].Cells["ProductId"].Value is not null)
+            {
+                string productId = dtg_OrderDetailList.Rows[rowIndex].Cells["ProductId"].Value.ToString();
+                int qtyBuy = Convert.ToInt32(dtg_OrderDetailList.Rows[rowIndex].Cells["Quantity"].Value.ToString());
+                totalOrder -= orderDetailList.Find(item => item.ProductId.Equals(productId)).Total;
+                txt_TongTien.Text = string.Format("{0:0,00}", totalOrder);
+                orderDetailList.RemoveAll(item => item.ProductId.Equals(productId));
+                Product pro = _productService.GetProduct(productId);
+                pro.QuantityAvailable = pro.QuantityAvailable + qtyBuy;
+                pro.QuantitySold = pro.QuantitySold - qtyBuy;
+                _productService.Update(productId, pro);
+                loadDataGridView();
+            }
         }
+
+
     }
 }

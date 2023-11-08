@@ -99,6 +99,23 @@ namespace BFShopBussinessObjects
             return age;
         }
 
+        public static bool ContainsLettersOrSpecialCharacters(string input)
+        {
+            return Regex.IsMatch(input, @"[\D]");
+        }
+
+        public static bool CheckProductIDExist(string proID, List<OrderDetail> odList)
+        {
+            foreach (var item in odList)
+            {
+                if (item.ProductId.Equals(proID))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public static AppSettings ConfigureAppSettings()
         {
             IConfiguration configuration = new ConfigurationBuilder()

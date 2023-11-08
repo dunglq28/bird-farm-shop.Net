@@ -123,7 +123,7 @@
   <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Quantity.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -139,7 +139,7 @@
   <data name="btn_LuuHoaDon.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAN
-        0gAADdIBb5L+jgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPjSURBVEhLvZd7
+        0AAADdABEGw9BwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAPjSURBVEhLvZd7
         bFNVHMf5X2M0+h/EBA1uLSPRKGqiIPj6B0jGwCCJyh8mOgkCY2OQ+KdI/ANlDmRi1OgMShenG4kPRqZ/
         ICK4sadjbF1LKe19tLftGtvec+7j6+8+Fpv1Fpd17CafnHNykvPJeXzPvXdJQ7t2vjlgYt/Xuk3TaQOv
         NWRQt0XC1pdlT14i6rbJeOLFKB57PorVL7hYdcJ/SEXVCQO+4yb8bUZ2ZYu2ccnspzkANLQ70oUWV7fq
@@ -162,7 +162,7 @@
   <data name="btn_ThemSanPham.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
-        6QAAAOkBVJIUSwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAShSURBVFhH3ZcL
+        4wAAAOMBD+bfpwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAShSURBVFhH3ZcL
         bFNVGMd7z7m37d50W4HQOsIiDlbZYhFHythk4HRmzMFmnXSFjbkHDHWDKSPbFMdGhiZkGMJQgzBnwgSW
         SFQUHwEfTAUfMSRLSDQRBZ9B1OEeXdvP75zelXa9dk+M8Z/80t17z/1+Z7fncav6P0dEUhE7shLRIf9a
         VmrU5EdCBNf06JB+jUSdlAgOQlQteE3yNLlxKRMEwVVbdBtcObUe4PMNMHS2HI7uygRdhMahFmmX3O6G

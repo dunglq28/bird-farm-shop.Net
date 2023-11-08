@@ -22,6 +22,9 @@ namespace BFShopRepository
         public Account GetAccount(string? email)
             => AccountDAO.Instance.GetAccount(email);
 
+        public Account GetAccountCusByPhone(string? phone)
+            => AccountDAO.Instance.GetAccountCusByPhone(phone);
+
         public List<Account> GetAccounts()
             => AccountDAO.Instance.GetAccounts();
 

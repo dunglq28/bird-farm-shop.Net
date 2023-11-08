@@ -69,6 +69,23 @@ namespace BFShopDAO
             return null!;
         }
 
+        public Account GetAccountCusByPhone(string? phone)
+        {
+            using (var context = new Bird_Farm_Shop_PRNContext())
+            {
+                if (phone is not null)
+                {
+                    var account = context.Accounts
+                        .Include(x => x.Role)
+                        .FirstOrDefault(x => x.Phone.Equals(phone) && x.Role.RoleDesc.Equals(Constants.IsCustomer));
+
+                    return account;
+                }
+            }
+            return null; 
+        }
+
+
         public bool Update(string email, Account account)
         {
             using (var context = new Bird_Farm_Shop_PRNContext())

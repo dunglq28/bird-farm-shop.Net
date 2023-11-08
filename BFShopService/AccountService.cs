@@ -27,6 +27,9 @@ namespace BFShopService
         public Account GetAccount(string? email)
             => _accountRepo.GetAccount(email);
 
+        public Account GetAccountCusByPhone(string? phone)
+            => _accountRepo.GetAccountCusByPhone(phone);
+
         public List<Account> GetAccounts()
             => _accountRepo.GetAccounts();
 

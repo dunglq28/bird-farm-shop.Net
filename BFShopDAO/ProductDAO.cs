@@ -1,5 +1,4 @@
 ﻿using BFShopBussinessObjects.Entities;
-using BFShopDAO.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
