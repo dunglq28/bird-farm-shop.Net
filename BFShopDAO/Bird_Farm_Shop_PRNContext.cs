@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using BFShopBussinessObjects.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 
-namespace BFShopBussinessObjects.Entities
+namespace BFShopDAO
 {
     public partial class Bird_Farm_Shop_PRNContext : DbContext
     {

@@ -83,12 +83,22 @@ namespace BFShopBussinessObjects
                 return false;
         }
 
+        public static bool IsValidPattern(string value, string pattern)
+        {
+            var regex = new Regex(pattern);
+            return regex.IsMatch(value);
+        }
+
         public static bool IsNotNumericString(string value)
         {
-            var pattern = new Regex(@"^[a-zA-Z ]+$");
+            var pattern = new Regex(@"^([^0-9]*)$");
             return pattern.IsMatch(value);
         }
 
+        public static double MoneyFormatToDouble(string value)
+        {
+            return Convert.ToDouble(value.Replace(".", ""));
+        }
         public static int CalculateAge(DateTime dateOfBirth)
         {
             int age = 0;
@@ -125,7 +135,5 @@ namespace BFShopBussinessObjects
 
             return configuration.GetSection("AppSettings").Get<AppSettings>();
         }
-
-
     }
 }

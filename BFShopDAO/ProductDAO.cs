@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -51,6 +52,7 @@ namespace BFShopDAO
                 productEntity.CategoryId = product.CategoryId;
                 productEntity.Age = product.Age;
                 productEntity.Gender = product.Gender;
+                productEntity.Color = product.Color;
                 productEntity.QuantityAvailable = product.QuantityAvailable;
                 productEntity.QuantitySold = product.QuantitySold;
                 productEntity.Price = product.Price;

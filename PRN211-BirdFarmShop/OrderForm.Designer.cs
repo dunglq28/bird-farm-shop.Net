@@ -1,4 +1,4 @@
-﻿namespace PRN211_BirdFarmShop
+namespace PRN211_BirdFarmShop
 {
     partial class OrderForm
     {

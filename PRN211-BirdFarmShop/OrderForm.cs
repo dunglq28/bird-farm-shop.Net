@@ -168,7 +168,7 @@ namespace PRN211_BirdFarmShop
             orderDetail.Product.ProductName = txt_TenHang.Text.ToString();
             orderDetail.Quantity = qtyBuy;
             orderDetail.Price = Convert.ToDouble(txt_DonGia.Text.ToString());
-            orderDetail.Total = Convert.ToDouble(txt_ThanhTien.Text.ToString());
+            orderDetail.Total = Convert.ToInt32(txt_ThanhTien.Text.ToString());
             orderDetailList.Add(orderDetail);
             loadDataGridView();
             totalOrder += orderDetail.Total;

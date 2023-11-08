@@ -168,6 +168,9 @@ namespace PRN211_BirdFarmShop
 
             // custom font
             UpdateFont();
+
+            // hide categoryId
+            tb_CategoryId.Enabled = false;
         }
 
         private void CategoryManagementForm_ResizeBegin(object sender, EventArgs e)
@@ -211,8 +214,8 @@ namespace PRN211_BirdFarmShop
 
             // unhide add button
             btn_Add.Enabled = true;
-            // unhide categoryId
-            tb_CategoryId.Enabled = true;
+            // hide categoryId
+            tb_CategoryId.Enabled = false;
             // hide update,delete btn
             btn_Delete.Enabled = false;
             btn_Update.Enabled = false;
@@ -228,8 +231,25 @@ namespace PRN211_BirdFarmShop
             try
             {
                 // category fields
-                var categoryId = tb_CategoryId.Text.Trim();
+                var categoryId = _categorySerivce.GetCategories().Last().CategoryId + 1;
                 var categoryName = tb_CategoryName.Text.Trim();
+
+                if(String.IsNullOrEmpty(categoryId.ToString()) 
+                    || String.IsNullOrEmpty(categoryName))
+                {
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin");
+                    return;
+                }
+
+                ///VALIDATION
+                #region
+                var isValidName = BFShopUtils.IsNotNumericString(categoryName);
+                if (!isValidName)
+                {
+                    MessageBox.Show("Loại chim không hợp lệ");
+                    return;
+                }
+                #endregion
 
                 // get category by id
                 var existCategory = _categorySerivce.GetCategory(Convert.ToInt32(categoryId));
