@@ -117,6 +117,18 @@ namespace BFShopBussinessObjects.Entities
                     .HasColumnType("datetime")
                     .HasColumnName("create_date");
 
+                entity.Property(e => e.StaffName)
+                    .HasMaxLength(155)
+                    .HasColumnName("StaffName");
+
+                entity.Property(e => e.CustomerName)
+                    .HasMaxLength(155)
+                    .HasColumnName("customerName");
+
+                entity.Property(e => e.CustomerPhone)
+                    .HasMaxLength(20)
+                    .HasColumnName("customerPhone");
+
                 entity.Property(e => e.Email)
                     .HasMaxLength(155)
                     .HasColumnName("email");

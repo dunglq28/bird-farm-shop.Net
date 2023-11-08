@@ -1,9 +1,15 @@
-﻿using BFShopBussinessObjects.Entities;
+﻿using BFShopBussinessObjects;
+using BFShopBussinessObjects.Entities;
+using BFShopBussinessObjects.Utils;
 using BFShopService;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -22,6 +28,8 @@ namespace PRN211_BirdFarmShop
         private static string _birdImage = string.Empty;
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IConfiguration _config;
+        private readonly AppSettings _appSetting;
 
         public ProductMangementForm()
         {
@@ -30,6 +38,14 @@ namespace PRN211_BirdFarmShop
             // services
             _productService = new ProductService();
             _categoryService = new CategoryService();
+
+            // config appsettings
+            _config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+            // monitor appsettings
+            _appSetting = BFShopUtils.ConfigureAppSettings();
         }
 
 
@@ -172,24 +188,40 @@ namespace PRN211_BirdFarmShop
         {
             tb_ProductId.Text = string.Empty;
             tb_ProductName.Text = string.Empty;
-            tb_Age.Text = string.Empty;
-            tb_Gender.Text = string.Empty;
-            tb_Color.Text = string.Empty;
             tb_AvailableQuantity.Text = string.Empty;
             tb_SoldQuantity.Text = string.Empty;
             dtp_CreateDate.Value = DateTime.Now;
             tb_Price.Text = string.Empty;
             tb_Chacteristic.Text = string.Empty;
-            tb_Status.Text = string.Empty;
             tb_Detail.Text = string.Empty;
             _birdImage = string.Empty;
             pic_Camera.Show();
             pic_Avatar.Image = null!;
 
+            // default combobox
             if (cb_Category.Items.Count > 0)
             {
                 cb_Category.SelectedIndex = 0;
             }
+            if (cb_Color.Items.Count > 0)
+            {
+                cb_Color.SelectedIndex = 0;
+            }
+            if (cb_Gender.Items.Count > 0)
+            {
+                cb_Gender.SelectedIndex = 0;
+            }
+            if (cb_Age.Items.Count > 0)
+            {
+                cb_Age.SelectedIndex = 0;
+            }
+            if (cb_Status.Items.Count > 0)
+            {
+                cb_Status.SelectedIndex = 0;
+            }
+
+            // hide status
+            cb_Status.Enabled = false;
         }
 
         private void ProductMangementForm_Load(object sender, EventArgs e)
@@ -206,6 +238,17 @@ namespace PRN211_BirdFarmShop
             cb_Category.ValueMember = "CategoryId";
             cb_Category.DisplayMember = "CategoryName";
             cb_Category.DataSource = categories;
+
+            // load gender
+            cb_Gender.DataSource = _appSetting.Genders;
+            // load tail color 
+            cb_Color.DataSource = _appSetting.TailColors;
+            // load age
+            cb_Age.DataSource = _appSetting.Ages;
+            // load status
+            cb_Status.DataSource = _appSetting.ProductStatus;
+
+            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
 
             // get all product
             var products = _productService.GetProducts()
@@ -227,7 +270,6 @@ namespace PRN211_BirdFarmShop
                                               x.Discount
                                           })
                                           .ToList();
-
             // binding source
             var bindingSource = new BindingSource();
             // set to bs datasoure <- products
@@ -240,61 +282,134 @@ namespace PRN211_BirdFarmShop
             CustomDataGridViewHeader();
             // custom font
             UpdateFont();
+
+            // hide delete btn
+            btn_Delete.Enabled = false;
+            // hide update btn
+            btn_Update.Enabled = false;
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
         {
-            var productId = tb_ProductId.Text.Trim();
-            var productName = tb_ProductName.Text.Trim();
-            var age = tb_Age.Text.Trim();
-            var color = tb_Color.Text.Trim();
-            var gender = tb_Gender.Text.Trim();
-            var availableQuantity = Convert.ToInt32(tb_AvailableQuantity.Text.Trim());
-            var soldQuantity = Convert.ToInt32(tb_SoldQuantity.Text.Trim());
-            var categoryId = Convert.ToInt32(cb_Category.SelectedValue);
-            var dateFormat = Convert.ToDateTime(dtp_CreateDate.Text).ToString("yyyy-MM-dd");
-            var createDate = DateTime.ParseExact(dateFormat,
-                    "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            var price = Convert.ToDouble(tb_Price.Text.Trim());
-            var Characteristics = tb_Chacteristic.Text.Trim();
-            var status = tb_Status.Text.Trim();
-            var detail = tb_Detail.Text.Trim();
-            var coupon = Convert.ToDouble(tb_Coupon.Text.Trim());
-
-            // generate product model 
-            var product = new Product()
+            try
             {
-                ProductId = productId,
-                ProductName = productName,
-                Age = age,
-                Color = color,
-                Gender = gender,
-                CategoryId = categoryId,
-                QuantityAvailable = availableQuantity,
-                QuantitySold = soldQuantity,
-                Price = price,
-                Characteristics = Characteristics,
-                Status = status,
-                DateCreated = createDate,
-                Detail = detail,
-                Image = _birdImage,
-                Discount = coupon
-            };
+                // ID,Name,Price are required to create new product
+                // the others may update later
+                if (String.IsNullOrEmpty(tb_ProductId.Text)
+                    || String.IsNullOrEmpty(tb_ProductName.Text)
+                    || String.IsNullOrEmpty(tb_Price.Text))
+                {
+                    MessageBox.Show("Vui lòng điền thông tin để thêm sản phẩm");
+                    return;
+                }
 
-            // create product
-            var isSucess = _productService.Create(product);
+                /// VALIDATION
+                #region
+                //Id Pattern: [Bxxx]
+                var isValidProductId = BFShopUtils.IsValidPattern(tb_ProductId.Text.Trim(), "^[Bb][0-9 ]+$");
+                isValidProductId.ToMessage("Mã sản không đúng định dạng [Bxxx]");
+                if (!isValidProductId) return;
 
-            if (isSucess)
-            {
-                // load form
-                ProductMangementForm_Load(sender, e);
+                // validate product name 
+                var isValidProductName = BFShopUtils.IsNotNumericString(tb_ProductName.Text.Trim());
+                isValidProductName.ToMessage("Tên sản phẩm không được chưa số");
+                if (!isValidProductName) return;
 
-                MessageBox.Show("Tạo mới sản phẩm thành công");
+                // validate number
+                if (!double.TryParse(tb_Price.Text.Trim().Replace(".", ""), out var price))
+                {
+                    if (price < 0) MessageBox.Show("Giá tiền không thể âm");
+                    MessageBox.Show("Giá tiền không hợp lệ");
+                    return;
+                }
+                if (!int.TryParse(tb_AvailableQuantity.Text.Trim(), out var availableQuantity))
+                {
+                    if (availableQuantity < 0) MessageBox.Show("Số lượng tồn kho không thể âm");
+                    MessageBox.Show("Số lượng tồn kho không hợp lệ");
+                    return;
+                }
+                if (!int.TryParse(tb_SoldQuantity.Text.Trim(), out var soldQuantity))
+                {
+                    if (soldQuantity < 0) MessageBox.Show("Số lượng đã bán không thể âm");
+                    MessageBox.Show("Số lượng đã bán không hợp lệ");
+                    return;
+                }
+                if (!int.TryParse(tb_Coupon.Text.Trim(), out var coupon))
+                {
+                    if (coupon < 0) MessageBox.Show("Số lượng đã bán không thể âm");
+                    else if (coupon > 100) MessageBox.Show("Mức giảm giá tối đa là 100%");
+                    MessageBox.Show("Giảm giá không hợp lệ");
+                    return;
+                }
+
+                // validate date
+                if (!DateTime.TryParse(dtp_CreateDate.Text, out var date))
+                {
+                    MessageBox.Show("Ngày nhập không hợp lệ");
+                    return;
+                }
+                #endregion
+
+
+                // product features
+                #region
+                var productId = tb_ProductId.Text.Trim().ToUpper();
+                var productName = tb_ProductName.Text.Trim();
+                var color = cb_Color.SelectedValue.ToString();
+                var gender = cb_Gender.SelectedValue.ToString();
+                var age = cb_Age.SelectedValue.ToString();
+                var categoryId = Convert.ToInt32(cb_Category.SelectedValue);
+                var dateFormat = date.ToString("yyyy-MM-dd");
+                var createDate = DateTime.ParseExact(dateFormat,
+                        "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                var Characteristics = tb_Chacteristic.Text.Trim();
+                var status = cb_Status.SelectedValue.ToString();
+                var detail = tb_Detail.Text.Trim();
+                #endregion
+
+                // generate product model 
+                var product = new Product()
+                {
+                    ProductId = productId,
+                    ProductName = productName,
+                    Age = age,
+                    Color = color,
+                    Gender = gender,
+                    CategoryId = categoryId,
+                    QuantityAvailable = availableQuantity,
+                    QuantitySold = soldQuantity,
+                    Price = price,
+                    Characteristics = Characteristics,
+                    Status = status,
+                    DateCreated = createDate,
+                    Detail = detail,
+                    Image = _birdImage,
+                    Discount = coupon
+                };
+
+                // create product
+                var isSucess = _productService.Create(product);
+
+                if (isSucess)
+                {
+                    // load form
+                    ProductMangementForm_Load(sender, e);
+
+                    MessageBox.Show("Tạo mới sản phẩm thành công");
+                    return;
+                }
+
+                MessageBox.Show("Tạo mới sản phẩm thất bại");
                 return;
             }
+            catch (FormatException ex)
+            {
 
-            MessageBox.Show("Tạo mới sản phẩm thất bại");
-            return;
+            }
+            catch (DbUpdateException ex)
+            {
+
+            }
         }
 
         private void btn_Delete_Click(object sender, EventArgs e)
@@ -317,69 +432,121 @@ namespace PRN211_BirdFarmShop
 
         private void btn_Update_Click(object sender, EventArgs e)
         {
-            var productId = tb_ProductId.Text.Trim();
-            var productName = tb_ProductName.Text.Trim();
-            var age = tb_Age.Text.Trim();
-            var color = tb_Color.Text.Trim();
-            var gender = tb_Gender.Text.Trim();
-            var availableQuantity = Convert.ToInt32(tb_AvailableQuantity.Text.Trim());
-            var soldQuantity = Convert.ToInt32(tb_SoldQuantity.Text.Trim());
-            var categoryId = Convert.ToInt32(cb_Category.SelectedValue);
-            var dateFormat = Convert.ToDateTime(dtp_CreateDate.Text).ToString("yyyy-MM-dd");
-            var createDate = DateTime.ParseExact(dateFormat,
-                    "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
-            var price = Double.Parse(tb_Price.Text.Trim(), cul);
-            var Characteristics = tb_Chacteristic.Text.Trim();
-            var status = tb_Status.Text.Trim();
-            var detail = tb_Detail.Text.Trim();
-            var coupon = Convert.ToDouble(tb_Coupon.Text.Trim());
-
-            // get product
-            var productEntity = _productService.GetProduct(productId);
-
-            if (!String.IsNullOrEmpty(_birdImage)
-                && productEntity.Image is not null)
+            try
             {
-                // delete prev image
-                FileInfo f = new FileInfo(Path.Combine(_imageFolderPath, productEntity.Image));
-                if (f.Exists)
+                /// VALIDATION
+                #region
+                //Id Pattern: [Bxxx]
+                var isValidProductId = BFShopUtils.IsValidPattern(tb_ProductId.Text.Trim(), "^[Bb][0-9 ]+$");
+                isValidProductId.ToMessage("Mã sản không đúng định dạng [Bxxx]");
+                if (!isValidProductId) return;
+
+                // validate product name 
+                var isValidProductName = BFShopUtils.IsNotNumericString(tb_ProductName.Text.Trim());
+                isValidProductName.ToMessage("Tên sản phẩm không được chưa số");
+                if (!isValidProductName) return;
+
+                // validate number
+                if (!double.TryParse(tb_Price.Text.Trim().Replace(".", ""), out var price))
                 {
-                    f.Delete();
+                    if (price < 0) MessageBox.Show("Giá tiền không thể âm");
+                    MessageBox.Show("Giá tiền không hợp lệ");
+                    return;
                 }
+                if (!int.TryParse(tb_AvailableQuantity.Text.Trim(), out var availableQuantity))
+                {
+                    if (availableQuantity < 0) MessageBox.Show("Số lượng tồn kho không thể âm");
+                    MessageBox.Show("Số lượng tồn kho không hợp lệ");
+                    return;
+                }
+                if (!int.TryParse(tb_SoldQuantity.Text.Trim(), out var soldQuantity))
+                {
+                    if (soldQuantity < 0) MessageBox.Show("Số lượng đã bán không thể âm");
+                    MessageBox.Show("Số lượng đã bán không hợp lệ");
+                    return;
+                }
+                if (!int.TryParse(tb_Coupon.Text.Trim(), out var coupon))
+                {
+                    if (coupon < 0) MessageBox.Show("Số lượng đã bán không thể âm");
+                    else if (coupon > 100) MessageBox.Show("Mức giảm giá tối đa là 100%");
+                    MessageBox.Show("Giảm giá không hợp lệ");
+                    return;
+                }
+
+                // validate date
+                if (!DateTime.TryParse(dtp_CreateDate.Text, out var date))
+                {
+                    MessageBox.Show("Ngày nhập không hợp lệ");
+                    return;
+                }
+                #endregion
+
+                // product features
+                #region
+                var productId = tb_ProductId.Text.Trim().ToUpper();
+                var productName = tb_ProductName.Text.Trim();
+                var color = cb_Color.SelectedValue.ToString();
+                var gender = cb_Gender.SelectedValue.ToString();
+                var age = cb_Age.SelectedValue.ToString();
+                var categoryId = Convert.ToInt32(cb_Category.SelectedValue);
+                var dateFormat = date.ToString("yyyy-MM-dd");
+                var createDate = DateTime.ParseExact(dateFormat,
+                        "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                var Characteristics = tb_Chacteristic.Text.Trim();
+                var status = cb_Status.SelectedValue.ToString();
+                var detail = tb_Detail.Text.Trim();
+                #endregion
+
+                // get product
+                var productEntity = _productService.GetProduct(productId);
+
+                if (!String.IsNullOrEmpty(_birdImage)
+                    && productEntity.Image is not null)
+                {
+                    // delete prev image
+                    FileInfo f = new FileInfo(Path.Combine(_imageFolderPath, productEntity.Image));
+                    if (f.Exists)
+                    {
+                        f.Delete();
+                    }
+                }
+
+                // generate product model 
+                var product = new Product()
+                {
+                    ProductName = productName,
+                    Age = age,
+                    Color = color,
+                    Gender = gender,
+                    CategoryId = categoryId,
+                    QuantityAvailable = availableQuantity,
+                    QuantitySold = soldQuantity,
+                    Price = price,
+                    Characteristics = Characteristics,
+                    Status = status,
+                    DateCreated = createDate,
+                    Detail = detail,
+                    Image = _birdImage,
+                    Discount = coupon
+                };
+
+                // update product
+                var isSuccess = _productService.Update(productId, product);
+
+                if (isSuccess)
+                {
+                    // load form
+                    ProductMangementForm_Load(sender, e);
+                    MessageBox.Show("Sửa sản phẩm thành công");
+                    return;
+                }
+
+                MessageBox.Show("Sửa sản phẩm thất bại");
             }
-
-            // generate product model 
-            var product = new Product()
+            catch (FormatException ex)
             {
-                ProductName = productName,
-                Age = age,
-                Color = color,
-                Gender = gender,
-                CategoryId = categoryId,
-                QuantityAvailable = availableQuantity,
-                QuantitySold = soldQuantity,
-                Price = price,
-                Characteristics = Characteristics,
-                Status = status,
-                DateCreated = createDate,
-                Detail = detail,
-                Image = _birdImage,
-                Discount = coupon
-            };
-
-            // update product
-            var isSuccess = _productService.Update(productId, product);
-
-            if (isSuccess)
-            {
-                // load form
-                ProductMangementForm_Load(sender, e);
-                MessageBox.Show("Sửa sản phẩm thành công");
-                return;
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin và đúng định dạng");
             }
-
-            MessageBox.Show("Sửa sản phẩm thất bại");
         }
 
         private void btn_Reset_Click(object sender, EventArgs e)
@@ -408,14 +575,14 @@ namespace PRN211_BirdFarmShop
             {
                 tb_ProductId.Text = dgv_Product.Rows[e.RowIndex].Cells[0].Value.ToString();
                 tb_ProductName.Text = dgv_Product.Rows[e.RowIndex].Cells[1].Value.ToString();
-                tb_Age.Text = dgv_Product.Rows[e.RowIndex].Cells[2].Value.ToString();
-                tb_Color.Text = dgv_Product.Rows[e.RowIndex].Cells[3].Value.ToString();
-                tb_Gender.Text = dgv_Product.Rows[e.RowIndex].Cells[4].Value.ToString();
                 tb_AvailableQuantity.Text = dgv_Product.Rows[e.RowIndex].Cells[5].Value.ToString();
                 tb_SoldQuantity.Text = dgv_Product.Rows[e.RowIndex].Cells[6].Value.ToString();
                 tb_Chacteristic.Text = dgv_Product.Rows[e.RowIndex].Cells[10].Value.ToString();
-                tb_Status.Text = dgv_Product.Rows[e.RowIndex].Cells[11].Value.ToString();
+                cb_Status.SelectedIndex = _appSetting.ProductStatus.ToList().IndexOf(dgv_Product.Rows[e.RowIndex].Cells[11].Value.ToString());
                 tb_Detail.Text = dgv_Product.Rows[e.RowIndex].Cells[12].Value.ToString();
+                cb_Age.SelectedIndex = _appSetting.Ages.ToList().IndexOf(dgv_Product.Rows[e.RowIndex].Cells[2].Value.ToString());
+                cb_Color.SelectedIndex = _appSetting.TailColors.ToList().IndexOf(dgv_Product.Rows[e.RowIndex].Cells[3].Value.ToString());
+                cb_Gender.SelectedIndex = _appSetting.Genders.ToList().IndexOf(dgv_Product.Rows[e.RowIndex].Cells[4].Value.ToString());
 
                 // price format
                 CultureInfo cul = CultureInfo.GetCultureInfo("vi-VN");
@@ -465,6 +632,8 @@ namespace PRN211_BirdFarmShop
             // unhide btns
             btn_Update.Enabled = true;
             btn_Delete.Enabled = true;
+            // unhide status
+            cb_Status.Enabled = true;
         }
 
         private void pic_Camera_Click(object sender, EventArgs e)
@@ -547,6 +716,18 @@ namespace PRN211_BirdFarmShop
             CustomDataGridViewHeader();
             // custom font
             UpdateFont();
+        }
+    }
+
+    // Extension method
+    public static class ProductManagementFormExtension
+    {
+        public static void ToMessage(this bool isValid, string message)
+        {
+            if (!isValid)
+            {
+                MessageBox.Show(message);
+            }
         }
     }
 }

@@ -31,16 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductMangementForm));
             label1 = new Label();
             tb_ProductName = new TextBox();
-            tb_Age = new TextBox();
-            tb_Color = new TextBox();
-            tb_Gender = new TextBox();
             tb_AvailableQuantity = new TextBox();
             cb_Category = new ComboBox();
             tb_SoldQuantity = new TextBox();
-            tb_Price = new TextBox();
-            tb_Chacteristic = new TextBox();
-            tb_Detail = new TextBox();
-            tb_Status = new TextBox();
             pic_Avatar = new PictureBox();
             pic_Camera = new PictureBox();
             pictureBox2 = new PictureBox();
@@ -82,9 +75,16 @@
             dtp_CreateDate = new DateTimePicker();
             panel15 = new Panel();
             pictureBox15 = new PictureBox();
-            tb_Coupon = new TextBox();
             pictureBox16 = new PictureBox();
             pictureBox17 = new PictureBox();
+            cb_Gender = new ComboBox();
+            cb_Color = new ComboBox();
+            cb_Age = new ComboBox();
+            cb_Status = new ComboBox();
+            tb_Detail = new TextBox();
+            tb_Price = new TextBox();
+            tb_Coupon = new TextBox();
+            tb_Chacteristic = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pic_Avatar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pic_Camera).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -112,7 +112,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.FromArgb(0, 117, 214);
-            label1.Location = new Point(379, 9);
+            label1.Location = new Point(581, 9);
             label1.Name = "label1";
             label1.Size = new Size(192, 30);
             label1.TabIndex = 12;
@@ -120,43 +120,16 @@
             // 
             // tb_ProductName
             // 
-            tb_ProductName.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_ProductName.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point);
             tb_ProductName.Location = new Point(77, 118);
             tb_ProductName.Name = "tb_ProductName";
             tb_ProductName.PlaceholderText = "Tên hàng hóa";
             tb_ProductName.Size = new Size(220, 30);
             tb_ProductName.TabIndex = 13;
             // 
-            // tb_Age
-            // 
-            tb_Age.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Age.Location = new Point(77, 165);
-            tb_Age.Name = "tb_Age";
-            tb_Age.PlaceholderText = "Tuổi";
-            tb_Age.Size = new Size(220, 30);
-            tb_Age.TabIndex = 14;
-            // 
-            // tb_Color
-            // 
-            tb_Color.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Color.Location = new Point(77, 215);
-            tb_Color.Name = "tb_Color";
-            tb_Color.PlaceholderText = "Màu lông";
-            tb_Color.Size = new Size(220, 30);
-            tb_Color.TabIndex = 15;
-            // 
-            // tb_Gender
-            // 
-            tb_Gender.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Gender.Location = new Point(77, 261);
-            tb_Gender.Name = "tb_Gender";
-            tb_Gender.PlaceholderText = "Giới tính";
-            tb_Gender.Size = new Size(220, 30);
-            tb_Gender.TabIndex = 16;
-            // 
             // tb_AvailableQuantity
             // 
-            tb_AvailableQuantity.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_AvailableQuantity.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point);
             tb_AvailableQuantity.Location = new Point(77, 354);
             tb_AvailableQuantity.Name = "tb_AvailableQuantity";
             tb_AvailableQuantity.PlaceholderText = "Số lượng tồn kho";
@@ -168,7 +141,7 @@
             cb_Category.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             cb_Category.ForeColor = SystemColors.ControlDarkDark;
             cb_Category.FormattingEnabled = true;
-            cb_Category.Location = new Point(404, 60);
+            cb_Category.Location = new Point(484, 67);
             cb_Category.Name = "cb_Category";
             cb_Category.Size = new Size(197, 32);
             cb_Category.TabIndex = 18;
@@ -176,57 +149,20 @@
             // 
             // tb_SoldQuantity
             // 
-            tb_SoldQuantity.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_SoldQuantity.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point);
             tb_SoldQuantity.Location = new Point(77, 308);
             tb_SoldQuantity.Name = "tb_SoldQuantity";
             tb_SoldQuantity.PlaceholderText = "Số lượng đã bán";
             tb_SoldQuantity.Size = new Size(220, 30);
             tb_SoldQuantity.TabIndex = 19;
             // 
-            // tb_Price
-            // 
-            tb_Price.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Price.Location = new Point(404, 155);
-            tb_Price.Name = "tb_Price";
-            tb_Price.PlaceholderText = "Giá bán";
-            tb_Price.Size = new Size(197, 30);
-            tb_Price.TabIndex = 20;
-            // 
-            // tb_Chacteristic
-            // 
-            tb_Chacteristic.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Chacteristic.Location = new Point(404, 253);
-            tb_Chacteristic.Name = "tb_Chacteristic";
-            tb_Chacteristic.PlaceholderText = "Đặc trưng";
-            tb_Chacteristic.Size = new Size(197, 30);
-            tb_Chacteristic.TabIndex = 21;
-            // 
-            // tb_Detail
-            // 
-            tb_Detail.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Detail.Location = new Point(404, 299);
-            tb_Detail.Multiline = true;
-            tb_Detail.Name = "tb_Detail";
-            tb_Detail.PlaceholderText = "Mô tả";
-            tb_Detail.Size = new Size(197, 132);
-            tb_Detail.TabIndex = 22;
-            // 
-            // tb_Status
-            // 
-            tb_Status.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Status.Location = new Point(77, 401);
-            tb_Status.Name = "tb_Status";
-            tb_Status.PlaceholderText = "Trạng thái";
-            tb_Status.Size = new Size(219, 30);
-            tb_Status.TabIndex = 24;
-            // 
             // pic_Avatar
             // 
             pic_Avatar.BackColor = SystemColors.ScrollBar;
             pic_Avatar.Cursor = Cursors.Hand;
-            pic_Avatar.Location = new Point(651, 60);
+            pic_Avatar.Location = new Point(817, 65);
             pic_Avatar.Name = "pic_Avatar";
-            pic_Avatar.Size = new Size(315, 324);
+            pic_Avatar.Size = new Size(477, 324);
             pic_Avatar.SizeMode = PictureBoxSizeMode.Zoom;
             pic_Avatar.TabIndex = 25;
             pic_Avatar.TabStop = false;
@@ -235,7 +171,7 @@
             // 
             pic_Camera.Cursor = Cursors.Hand;
             pic_Camera.Image = (Image)resources.GetObject("pic_Camera.Image");
-            pic_Camera.Location = new Point(775, 197);
+            pic_Camera.Location = new Point(1021, 207);
             pic_Camera.Name = "pic_Camera";
             pic_Camera.Size = new Size(65, 35);
             pic_Camera.SizeMode = PictureBoxSizeMode.Zoom;
@@ -266,7 +202,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(358, 60);
+            pictureBox3.Location = new Point(438, 67);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(30, 32);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -326,7 +262,7 @@
             // pictureBox9
             // 
             pictureBox9.Image = (Image)resources.GetObject("pictureBox9.Image");
-            pictureBox9.Location = new Point(358, 103);
+            pictureBox9.Location = new Point(438, 110);
             pictureBox9.Name = "pictureBox9";
             pictureBox9.Size = new Size(30, 35);
             pictureBox9.SizeMode = PictureBoxSizeMode.Zoom;
@@ -336,7 +272,7 @@
             // pictureBox10
             // 
             pictureBox10.Image = (Image)resources.GetObject("pictureBox10.Image");
-            pictureBox10.Location = new Point(358, 149);
+            pictureBox10.Location = new Point(438, 156);
             pictureBox10.Name = "pictureBox10";
             pictureBox10.Size = new Size(30, 35);
             pictureBox10.SizeMode = PictureBoxSizeMode.Zoom;
@@ -346,7 +282,7 @@
             // pictureBox11
             // 
             pictureBox11.Image = (Image)resources.GetObject("pictureBox11.Image");
-            pictureBox11.Location = new Point(358, 247);
+            pictureBox11.Location = new Point(438, 254);
             pictureBox11.Name = "pictureBox11";
             pictureBox11.Size = new Size(30, 35);
             pictureBox11.SizeMode = PictureBoxSizeMode.Zoom;
@@ -366,7 +302,7 @@
             // pictureBox13
             // 
             pictureBox13.Image = (Image)resources.GetObject("pictureBox13.Image");
-            pictureBox13.Location = new Point(358, 296);
+            pictureBox13.Location = new Point(438, 303);
             pictureBox13.Name = "pictureBox13";
             pictureBox13.Size = new Size(30, 35);
             pictureBox13.SizeMode = PictureBoxSizeMode.Zoom;
@@ -381,7 +317,7 @@
             dgv_Product.Location = new Point(29, 458);
             dgv_Product.Name = "dgv_Product";
             dgv_Product.RowTemplate.Height = 25;
-            dgv_Product.Size = new Size(939, 254);
+            dgv_Product.Size = new Size(1265, 276);
             dgv_Product.TabIndex = 42;
             dgv_Product.CellClick += dgv_Product_CellClick;
             // 
@@ -389,7 +325,7 @@
             // 
             panel3.BackColor = Color.FromArgb(0, 117, 214);
             panel3.ForeColor = Color.FromArgb(0, 117, 214);
-            panel3.Location = new Point(788, 445);
+            panel3.Location = new Point(1116, 450);
             panel3.Name = "panel3";
             panel3.Size = new Size(180, 3);
             panel3.TabIndex = 45;
@@ -397,7 +333,7 @@
             // pictureBox14
             // 
             pictureBox14.Image = (Image)resources.GetObject("pictureBox14.Image");
-            pictureBox14.Location = new Point(933, 409);
+            pictureBox14.Location = new Point(1261, 414);
             pictureBox14.Name = "pictureBox14";
             pictureBox14.Size = new Size(33, 27);
             pictureBox14.SizeMode = PictureBoxSizeMode.Zoom;
@@ -408,7 +344,7 @@
             // 
             tb_Search.AllowDrop = true;
             tb_Search.Font = new Font("Microsoft Sans Serif", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Search.Location = new Point(788, 409);
+            tb_Search.Location = new Point(1116, 414);
             tb_Search.Name = "tb_Search";
             tb_Search.PlaceholderText = "Tìm kiếm...";
             tb_Search.Size = new Size(178, 31);
@@ -482,7 +418,7 @@
             // 
             panel9.BackColor = Color.FromArgb(0, 117, 214);
             panel9.ForeColor = Color.FromArgb(0, 117, 214);
-            panel9.Location = new Point(358, 99);
+            panel9.Location = new Point(438, 106);
             panel9.Name = "panel9";
             panel9.Size = new Size(245, 3);
             panel9.TabIndex = 52;
@@ -491,7 +427,7 @@
             // 
             panel10.BackColor = Color.FromArgb(0, 117, 214);
             panel10.ForeColor = Color.FromArgb(0, 117, 214);
-            panel10.Location = new Point(358, 140);
+            panel10.Location = new Point(438, 147);
             panel10.Name = "panel10";
             panel10.Size = new Size(245, 3);
             panel10.TabIndex = 48;
@@ -500,7 +436,7 @@
             // 
             panel11.BackColor = Color.FromArgb(0, 117, 214);
             panel11.ForeColor = Color.FromArgb(0, 117, 214);
-            panel11.Location = new Point(356, 187);
+            panel11.Location = new Point(436, 194);
             panel11.Name = "panel11";
             panel11.Size = new Size(245, 3);
             panel11.TabIndex = 48;
@@ -509,7 +445,7 @@
             // 
             panel12.BackColor = Color.FromArgb(0, 117, 214);
             panel12.ForeColor = Color.FromArgb(0, 117, 214);
-            panel12.Location = new Point(356, 285);
+            panel12.Location = new Point(436, 292);
             panel12.Name = "panel12";
             panel12.Size = new Size(245, 3);
             panel12.TabIndex = 48;
@@ -518,7 +454,7 @@
             // 
             panel13.BackColor = Color.FromArgb(0, 117, 214);
             panel13.ForeColor = Color.FromArgb(0, 117, 214);
-            panel13.Location = new Point(358, 233);
+            panel13.Location = new Point(438, 240);
             panel13.Name = "panel13";
             panel13.Size = new Size(245, 3);
             panel13.TabIndex = 48;
@@ -527,7 +463,7 @@
             // 
             panel14.BackColor = Color.FromArgb(0, 117, 214);
             panel14.ForeColor = Color.FromArgb(0, 117, 214);
-            panel14.Location = new Point(356, 331);
+            panel14.Location = new Point(436, 338);
             panel14.Name = "panel14";
             panel14.Size = new Size(35, 3);
             panel14.TabIndex = 48;
@@ -538,7 +474,7 @@
             btn_Add.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btn_Add.Image = (Image)resources.GetObject("btn_Add.Image");
             btn_Add.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Add.Location = new Point(29, 723);
+            btn_Add.Location = new Point(30, 745);
             btn_Add.Name = "btn_Add";
             btn_Add.Size = new Size(108, 45);
             btn_Add.TabIndex = 53;
@@ -553,7 +489,7 @@
             btn_Delete.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btn_Delete.Image = (Image)resources.GetObject("btn_Delete.Image");
             btn_Delete.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Delete.Location = new Point(166, 723);
+            btn_Delete.Location = new Point(160, 745);
             btn_Delete.Name = "btn_Delete";
             btn_Delete.Size = new Size(108, 45);
             btn_Delete.TabIndex = 54;
@@ -568,7 +504,7 @@
             btn_Update.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btn_Update.Image = (Image)resources.GetObject("btn_Update.Image");
             btn_Update.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Update.Location = new Point(300, 723);
+            btn_Update.Location = new Point(292, 745);
             btn_Update.Name = "btn_Update";
             btn_Update.Size = new Size(108, 45);
             btn_Update.TabIndex = 55;
@@ -583,11 +519,11 @@
             btn_Reset.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btn_Reset.Image = (Image)resources.GetObject("btn_Reset.Image");
             btn_Reset.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Reset.Location = new Point(437, 723);
+            btn_Reset.Location = new Point(427, 745);
             btn_Reset.Name = "btn_Reset";
-            btn_Reset.Size = new Size(113, 45);
+            btn_Reset.Size = new Size(120, 45);
             btn_Reset.TabIndex = 56;
-            btn_Reset.Text = "Bỏ Qua";
+            btn_Reset.Text = "Làm Mới";
             btn_Reset.TextAlign = ContentAlignment.MiddleRight;
             btn_Reset.UseVisualStyleBackColor = false;
             btn_Reset.Click += btn_Reset_Click;
@@ -598,7 +534,7 @@
             btn_Close.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btn_Close.Image = (Image)resources.GetObject("btn_Close.Image");
             btn_Close.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Close.Location = new Point(573, 723);
+            btn_Close.Location = new Point(573, 745);
             btn_Close.Name = "btn_Close";
             btn_Close.Size = new Size(108, 45);
             btn_Close.TabIndex = 57;
@@ -609,7 +545,7 @@
             // 
             // tb_ProductId
             // 
-            tb_ProductId.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
+            tb_ProductId.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point);
             tb_ProductId.Location = new Point(77, 72);
             tb_ProductId.Name = "tb_ProductId";
             tb_ProductId.PlaceholderText = "Mã hàng hóa";
@@ -619,7 +555,7 @@
             // dtp_CreateDate
             // 
             dtp_CreateDate.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            dtp_CreateDate.Location = new Point(403, 109);
+            dtp_CreateDate.Location = new Point(483, 116);
             dtp_CreateDate.Name = "dtp_CreateDate";
             dtp_CreateDate.Size = new Size(200, 29);
             dtp_CreateDate.TabIndex = 58;
@@ -636,28 +572,19 @@
             // pictureBox15
             // 
             pictureBox15.Image = (Image)resources.GetObject("pictureBox15.Image");
-            pictureBox15.Location = new Point(358, 196);
+            pictureBox15.Location = new Point(438, 203);
             pictureBox15.Name = "pictureBox15";
             pictureBox15.Size = new Size(30, 35);
             pictureBox15.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox15.TabIndex = 53;
             pictureBox15.TabStop = false;
             // 
-            // tb_Coupon
-            // 
-            tb_Coupon.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
-            tb_Coupon.Location = new Point(403, 202);
-            tb_Coupon.Name = "tb_Coupon";
-            tb_Coupon.PlaceholderText = "Giám giá";
-            tb_Coupon.Size = new Size(198, 30);
-            tb_Coupon.TabIndex = 52;
-            // 
             // pictureBox16
             // 
             pictureBox16.BackColor = SystemColors.Window;
             pictureBox16.BorderStyle = BorderStyle.Fixed3D;
             pictureBox16.Image = (Image)resources.GetObject("pictureBox16.Image");
-            pictureBox16.Location = new Point(570, 207);
+            pictureBox16.Location = new Point(650, 214);
             pictureBox16.Name = "pictureBox16";
             pictureBox16.Size = new Size(31, 25);
             pictureBox16.SizeMode = PictureBoxSizeMode.Zoom;
@@ -669,18 +596,103 @@
             pictureBox17.BackColor = SystemColors.Window;
             pictureBox17.BorderStyle = BorderStyle.Fixed3D;
             pictureBox17.Image = (Image)resources.GetObject("pictureBox17.Image");
-            pictureBox17.Location = new Point(570, 155);
+            pictureBox17.Location = new Point(650, 162);
             pictureBox17.Name = "pictureBox17";
             pictureBox17.Size = new Size(31, 29);
             pictureBox17.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox17.TabIndex = 60;
             pictureBox17.TabStop = false;
             // 
+            // cb_Gender
+            // 
+            cb_Gender.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            cb_Gender.ForeColor = SystemColors.ControlDarkDark;
+            cb_Gender.FormattingEnabled = true;
+            cb_Gender.Location = new Point(77, 261);
+            cb_Gender.Name = "cb_Gender";
+            cb_Gender.Size = new Size(219, 32);
+            cb_Gender.TabIndex = 61;
+            cb_Gender.Text = "Giới tính";
+            // 
+            // cb_Color
+            // 
+            cb_Color.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            cb_Color.ForeColor = SystemColors.ControlDarkDark;
+            cb_Color.FormattingEnabled = true;
+            cb_Color.Location = new Point(78, 210);
+            cb_Color.Name = "cb_Color";
+            cb_Color.Size = new Size(219, 32);
+            cb_Color.TabIndex = 62;
+            cb_Color.Text = "Màu lông";
+            // 
+            // cb_Age
+            // 
+            cb_Age.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            cb_Age.ForeColor = SystemColors.ControlDarkDark;
+            cb_Age.FormattingEnabled = true;
+            cb_Age.Location = new Point(77, 165);
+            cb_Age.Name = "cb_Age";
+            cb_Age.Size = new Size(219, 32);
+            cb_Age.TabIndex = 63;
+            cb_Age.Text = "Tuổi";
+            // 
+            // cb_Status
+            // 
+            cb_Status.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            cb_Status.ForeColor = SystemColors.ControlDarkDark;
+            cb_Status.FormattingEnabled = true;
+            cb_Status.Location = new Point(77, 399);
+            cb_Status.Name = "cb_Status";
+            cb_Status.Size = new Size(219, 32);
+            cb_Status.TabIndex = 64;
+            cb_Status.Text = "Trạng thái";
+            // 
+            // tb_Detail
+            // 
+            tb_Detail.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            tb_Detail.Location = new Point(484, 306);
+            tb_Detail.Multiline = true;
+            tb_Detail.Name = "tb_Detail";
+            tb_Detail.PlaceholderText = "Mô tả";
+            tb_Detail.Size = new Size(197, 132);
+            tb_Detail.TabIndex = 22;
+            // 
+            // tb_Price
+            // 
+            tb_Price.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            tb_Price.Location = new Point(484, 162);
+            tb_Price.Name = "tb_Price";
+            tb_Price.PlaceholderText = "Giá bán";
+            tb_Price.Size = new Size(197, 30);
+            tb_Price.TabIndex = 20;
+            // 
+            // tb_Coupon
+            // 
+            tb_Coupon.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            tb_Coupon.Location = new Point(483, 209);
+            tb_Coupon.Name = "tb_Coupon";
+            tb_Coupon.PlaceholderText = "Giám giá";
+            tb_Coupon.Size = new Size(198, 30);
+            tb_Coupon.TabIndex = 52;
+            // 
+            // tb_Chacteristic
+            // 
+            tb_Chacteristic.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            tb_Chacteristic.Location = new Point(484, 260);
+            tb_Chacteristic.Name = "tb_Chacteristic";
+            tb_Chacteristic.PlaceholderText = "Đặc trưng";
+            tb_Chacteristic.Size = new Size(197, 30);
+            tb_Chacteristic.TabIndex = 21;
+            // 
             // ProductMangementForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(994, 780);
+            ClientSize = new Size(1320, 802);
+            Controls.Add(cb_Status);
+            Controls.Add(cb_Age);
+            Controls.Add(cb_Color);
+            Controls.Add(cb_Gender);
             Controls.Add(pictureBox17);
             Controls.Add(pictureBox16);
             Controls.Add(panel15);
@@ -724,16 +736,12 @@
             Controls.Add(pictureBox2);
             Controls.Add(pic_Camera);
             Controls.Add(pic_Avatar);
-            Controls.Add(tb_Status);
             Controls.Add(tb_Detail);
             Controls.Add(tb_Chacteristic);
             Controls.Add(tb_Price);
             Controls.Add(tb_SoldQuantity);
             Controls.Add(cb_Category);
             Controls.Add(tb_AvailableQuantity);
-            Controls.Add(tb_Gender);
-            Controls.Add(tb_Color);
-            Controls.Add(tb_Age);
             Controls.Add(tb_ProductName);
             Controls.Add(label1);
             Controls.Add(tb_ProductId);
@@ -768,16 +776,9 @@
         #endregion
         private Label label1;
         private TextBox tb_ProductName;
-        private TextBox tb_Age;
-        private TextBox tb_Color;
-        private TextBox tb_Gender;
         private TextBox tb_AvailableQuantity;
         private ComboBox cb_Category;
         private TextBox tb_SoldQuantity;
-        private TextBox tb_Price;
-        private TextBox tb_Chacteristic;
-        private TextBox tb_Detail;
-        private TextBox tb_Status;
         private PictureBox pic_Avatar;
         private PictureBox pic_Camera;
         private PictureBox pictureBox2;
@@ -819,8 +820,15 @@
         private DateTimePicker dtp_CreateDate;
         private Panel panel15;
         private PictureBox pictureBox15;
-        private TextBox tb_Coupon;
         private PictureBox pictureBox16;
         private PictureBox pictureBox17;
+        private ComboBox cb_Gender;
+        private ComboBox cb_Color;
+        private ComboBox cb_Age;
+        private ComboBox cb_Status;
+        private TextBox tb_Detail;
+        private TextBox tb_Price;
+        private TextBox tb_Coupon;
+        private TextBox tb_Chacteristic;
     }
 }

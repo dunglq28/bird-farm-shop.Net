@@ -10,8 +10,11 @@ namespace BFShopBussinessObjects.Entities
             OrderDetails = new HashSet<OrderDetail>();
         }
 
-        public string OrderId { get; set; } = null!;
-        public string Email { get; set; } = null!;
+        public string OrderId { get; set; }
+        public string Email { get; set; }
+        public string StaffName { get; set; }
+        public string CustomerPhone { get; set; }
+        public string CustomerName { get; set; }
         public DateTime? CreateDate { get; set; }
         public int TotalItem { get; set; }
         public double TotalPrice { get; set; }

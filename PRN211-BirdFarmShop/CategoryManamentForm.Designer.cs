@@ -67,7 +67,7 @@
             tb_CategoryId.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
             tb_CategoryId.Location = new Point(90, 76);
             tb_CategoryId.Name = "tb_CategoryId";
-            tb_CategoryId.PlaceholderText = "Mã chất liệu";
+            tb_CategoryId.PlaceholderText = "Mã loại";
             tb_CategoryId.Size = new Size(269, 30);
             tb_CategoryId.TabIndex = 10;
             // 
@@ -76,7 +76,7 @@
             tb_CategoryName.Font = new Font("Microsoft Sans Serif", 15F, FontStyle.Regular, GraphicsUnit.Point);
             tb_CategoryName.Location = new Point(90, 134);
             tb_CategoryName.Name = "tb_CategoryName";
-            tb_CategoryName.PlaceholderText = "Tên chất liệu";
+            tb_CategoryName.PlaceholderText = "Loại Chim";
             tb_CategoryName.Size = new Size(269, 30);
             tb_CategoryName.TabIndex = 11;
             // 
@@ -184,11 +184,11 @@
             btn_Reset.Font = new Font("Microsoft Sans Serif", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
             btn_Reset.Image = (Image)resources.GetObject("btn_Reset.Image");
             btn_Reset.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Reset.Location = new Point(446, 441);
+            btn_Reset.Location = new Point(442, 441);
             btn_Reset.Name = "btn_Reset";
-            btn_Reset.Size = new Size(113, 45);
+            btn_Reset.Size = new Size(119, 45);
             btn_Reset.TabIndex = 34;
-            btn_Reset.Text = "Bỏ Qua";
+            btn_Reset.Text = "Làm Mới";
             btn_Reset.TextAlign = ContentAlignment.MiddleRight;
             btn_Reset.UseVisualStyleBackColor = false;
             btn_Reset.Click += btn_Reset_Click;
