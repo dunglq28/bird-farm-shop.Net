@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OrderForm));
             label1 = new Label();
             splitContainer1 = new SplitContainer();
             groupBox1 = new GroupBox();
@@ -40,6 +41,7 @@
             label4 = new Label();
             label2 = new Label();
             groupBox2 = new GroupBox();
+            label13 = new Label();
             txt_TongTien = new TextBox();
             label12 = new Label();
             dtg_OrderDetailList = new DataGridView();
@@ -66,7 +68,8 @@
             label7 = new Label();
             label9 = new Label();
             label8 = new Label();
-            label13 = new Label();
+            textBox1 = new TextBox();
+            label14 = new Label();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -217,6 +220,17 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Thông tin các mặt hàng";
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            label13.ForeColor = Color.Red;
+            label13.Location = new Point(13, 358);
+            label13.Name = "label13";
+            label13.Size = new Size(210, 21);
+            label13.TabIndex = 29;
+            label13.Text = "Nháy đúp một dòng để xoá";
+            // 
             // txt_TongTien
             // 
             txt_TongTien.Location = new Point(854, 352);
@@ -238,8 +252,11 @@
             // 
             // dtg_OrderDetailList
             // 
+            dtg_OrderDetailList.BackgroundColor = Color.White;
+            dtg_OrderDetailList.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             dtg_OrderDetailList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtg_OrderDetailList.Columns.AddRange(new DataGridViewColumn[] { ProductId, Column2, Column3, Column4, Column5, Column6 });
+            dtg_OrderDetailList.GridColor = SystemColors.ControlLight;
             dtg_OrderDetailList.Location = new Point(6, 146);
             dtg_OrderDetailList.Name = "dtg_OrderDetailList";
             dtg_OrderDetailList.RowHeadersWidth = 62;
@@ -254,7 +271,7 @@
             ProductId.HeaderText = "Mã hàng";
             ProductId.MinimumWidth = 8;
             ProductId.Name = "ProductId";
-            ProductId.Width = 150;
+            ProductId.Width = 200;
             // 
             // Column2
             // 
@@ -310,22 +327,28 @@
             // 
             btn_LuuHoaDon.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btn_LuuHoaDon.ForeColor = Color.FromArgb(0, 117, 214);
-            btn_LuuHoaDon.Location = new Point(424, 5);
+            btn_LuuHoaDon.Image = (Image)resources.GetObject("btn_LuuHoaDon.Image");
+            btn_LuuHoaDon.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_LuuHoaDon.Location = new Point(410, 5);
             btn_LuuHoaDon.Name = "btn_LuuHoaDon";
-            btn_LuuHoaDon.Size = new Size(178, 48);
+            btn_LuuHoaDon.Size = new Size(190, 48);
             btn_LuuHoaDon.TabIndex = 3;
             btn_LuuHoaDon.Text = "Lưu hoá đơn";
+            btn_LuuHoaDon.TextAlign = ContentAlignment.MiddleRight;
             btn_LuuHoaDon.UseVisualStyleBackColor = true;
             // 
             // btn_ThemSanPham
             // 
             btn_ThemSanPham.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btn_ThemSanPham.ForeColor = Color.FromArgb(0, 117, 214);
-            btn_ThemSanPham.Location = new Point(214, 5);
+            btn_ThemSanPham.Image = (Image)resources.GetObject("btn_ThemSanPham.Image");
+            btn_ThemSanPham.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_ThemSanPham.Location = new Point(205, 5);
             btn_ThemSanPham.Name = "btn_ThemSanPham";
-            btn_ThemSanPham.Size = new Size(178, 48);
+            btn_ThemSanPham.Size = new Size(199, 48);
             btn_ThemSanPham.TabIndex = 2;
             btn_ThemSanPham.Text = "Thêm sản phẩm";
+            btn_ThemSanPham.TextAlign = ContentAlignment.MiddleRight;
             btn_ThemSanPham.UseVisualStyleBackColor = true;
             btn_ThemSanPham.Click += btn_ThemSanPham_Click;
             // 
@@ -333,11 +356,14 @@
             // 
             btn_ThemHoaDon.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             btn_ThemHoaDon.ForeColor = Color.FromArgb(0, 117, 214);
+            btn_ThemHoaDon.Image = (Image)resources.GetObject("btn_ThemHoaDon.Image");
+            btn_ThemHoaDon.ImageAlign = ContentAlignment.MiddleLeft;
             btn_ThemHoaDon.Location = new Point(5, 5);
             btn_ThemHoaDon.Name = "btn_ThemHoaDon";
-            btn_ThemHoaDon.Size = new Size(178, 48);
+            btn_ThemHoaDon.Size = new Size(194, 48);
             btn_ThemHoaDon.TabIndex = 0;
             btn_ThemHoaDon.Text = "Thêm hoá đơn";
+            btn_ThemHoaDon.TextAlign = ContentAlignment.MiddleRight;
             btn_ThemHoaDon.UseVisualStyleBackColor = true;
             btn_ThemHoaDon.Click += btn_ThemHoaDon_Click;
             // 
@@ -475,22 +501,29 @@
             label8.TabIndex = 13;
             label8.Text = "Tên hàng:";
             // 
-            // label13
+            // textBox1
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            label13.ForeColor = Color.Red;
-            label13.Location = new Point(13, 358);
-            label13.Name = "label13";
-            label13.Size = new Size(210, 21);
-            label13.TabIndex = 29;
-            label13.Text = "Nháy đúp một dòng để xoá";
+            textBox1.Location = new Point(16, 708);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(549, 31);
+            textBox1.TabIndex = 2;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(593, 711);
+            label14.Name = "label14";
+            label14.Size = new Size(84, 25);
+            label14.TabIndex = 3;
+            label14.Text = "Tìm kiếm";
             // 
             // OrderForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1090, 747);
+            Controls.Add(label14);
+            Controls.Add(textBox1);
             Controls.Add(splitContainer1);
             Name = "OrderForm";
             Text = "OrderForm";
@@ -508,6 +541,7 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -544,12 +578,14 @@
         private Button btn_ThemHoaDon;
         private Button btn_LuuHoaDon;
         private Button btn_ThemSanPham;
+        private Label label13;
         private DataGridViewTextBoxColumn ProductId;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
         private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column6;
-        private Label label13;
+        private TextBox textBox1;
+        private Label label14;
     }
 }
