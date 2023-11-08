@@ -25,8 +25,14 @@ namespace BFShopRepository
         public List<Account> GetAccounts()
             => AccountDAO.Instance.GetAccounts();
 
+        public List<Account> getAllAccountByRole(String RoleDecs)
+            => AccountDAO.Instance.getAccountByRole(RoleDecs);
+
         public List<Account> SearchAccount(string searchValue)
             => AccountDAO.Instance.SearchAccount(searchValue);
+
+        public List<Account> SearchAccountInRole(string searchValue, string RoleDecs)
+            => AccountDAO.Instance.SearchAccountInRole(searchValue, RoleDecs);
 
         public bool Update(string email, Account account)
             => AccountDAO.Instance.Update(email, account);

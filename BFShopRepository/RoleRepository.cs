@@ -13,5 +13,8 @@ namespace BFShopRepository
         
         public Role GetByDesc(string desc)
             => RoleDAO.Instance.GetByDesc(desc);
+
+        public List<Role> GetRoles()
+            => RoleDAO.Instance.GetRoles();
     }
 }

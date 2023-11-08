@@ -28,12 +28,19 @@ namespace BFShopService
             => _accountRepo.GetAccount(email);
 
         public List<Account> GetAccounts()
-            => _accountRepo.GetAccounts();  
+            => _accountRepo.GetAccounts();
+
+        public List<Account> getAllAccountByRole(string RoleDecs)
+            => _accountRepo.getAllAccountByRole(RoleDecs);
 
         public List<Account> SearchAccount(string searchValue)
             => _accountRepo.SearchAccount(searchValue);
 
+        public List<Account> SearchAccountInRole(string searchValue, string RoleDecs)
+            => _accountRepo.SearchAccountInRole(searchValue, RoleDecs);
+
         public bool Update(string email, Account account)
             => _accountRepo.Update(email, account);
+
     }
 }

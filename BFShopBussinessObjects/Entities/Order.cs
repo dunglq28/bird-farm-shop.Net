@@ -19,7 +19,7 @@ namespace BFShopBussinessObjects.Entities
         public int TotalItem { get; set; }
         public double TotalPrice { get; set; }
 
-        public virtual Account EmailNavigation { get; set; }
+        public virtual Account EmailNavigation { get; set; } = null!;
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

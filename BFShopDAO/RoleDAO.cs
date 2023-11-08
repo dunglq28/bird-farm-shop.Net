@@ -1,5 +1,4 @@
 ﻿using BFShopBussinessObjects.Entities;
-using BFShopDAO.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +32,14 @@ namespace BFShopDAO
             using(var context = new Bird_Farm_Shop_PRNContext())
             {
                 return context.Roles.Where(x => x.RoleDesc.Equals(desc)).FirstOrDefault();
+            }
+        }
+
+        public List<Role> GetRoles()
+        {
+            using (var context = new Bird_Farm_Shop_PRNContext())
+            {
+                return context.Roles.ToList();
             }
         }
     }

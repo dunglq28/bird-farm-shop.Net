@@ -1,4 +1,5 @@
-﻿using BFShopBussinessObjects.Utils;
+﻿using BFShopBussinessObjects.Entities;
+using BFShopBussinessObjects.Utils;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -97,6 +98,15 @@ namespace BFShopBussinessObjects
         public static double MoneyFormatToDouble(string value)
         {
             return Convert.ToDouble(value.Replace(".", ""));
+
+        public static int CalculateAge(DateTime dateOfBirth)
+        {
+            int age = 0;
+            age = DateTime.Now.Year - dateOfBirth.Year;
+            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
+                age = age - 1;
+
+            return age;
         }
 
         public static AppSettings ConfigureAppSettings()
@@ -108,5 +118,7 @@ namespace BFShopBussinessObjects
 
             return configuration.GetSection("AppSettings").Get<AppSettings>();
         }
+
+
     }
 }
