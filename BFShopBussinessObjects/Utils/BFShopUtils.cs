@@ -98,7 +98,7 @@ namespace BFShopBussinessObjects
         public static double MoneyFormatToDouble(string value)
         {
             return Convert.ToDouble(value.Replace(".", ""));
-
+        }
         public static int CalculateAge(DateTime dateOfBirth)
         {
             int age = 0;
@@ -107,6 +107,23 @@ namespace BFShopBussinessObjects
                 age = age - 1;
 
             return age;
+        }
+
+        public static bool ContainsLettersOrSpecialCharacters(string input)
+        {
+            return Regex.IsMatch(input, @"[\D]");
+        }
+
+        public static bool CheckProductIDExist(string proID, List<OrderDetail> odList)
+        {
+            foreach (var item in odList)
+            {
+                if (item.ProductId.Equals(proID))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static AppSettings ConfigureAppSettings()
@@ -118,7 +135,5 @@ namespace BFShopBussinessObjects
 
             return configuration.GetSection("AppSettings").Get<AppSettings>();
         }
-
-
     }
 }

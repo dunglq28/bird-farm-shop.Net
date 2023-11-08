@@ -1,4 +1,4 @@
-﻿using BFShopDAO.Entities;
+﻿using BFShopDAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
