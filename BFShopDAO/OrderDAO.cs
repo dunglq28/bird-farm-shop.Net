@@ -50,6 +50,27 @@ namespace BFShopDAO
 
         }
 
+        public bool AddNewOrder(Order order)
+        {
+            using (var context = new Bird_Farm_Shop_PRNContext())
+            {
+                context.Orders.Add(order);
+                return context.SaveChanges() > 0;
+            }
+        }
+
+        public Order Search(string orderID)
+        {
+            if (string.IsNullOrEmpty(orderID))
+            {
+                return null; 
+            }
+
+            using (var context = new Bird_Farm_Shop_PRNContext())
+            {
+                return context.Orders.SingleOrDefault(m => m.OrderId.Equals(orderID));
+            }
+        }
 
     }
 }

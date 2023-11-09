@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace BFShopService
 {
-    public interface IOrderService
+    public interface IOrderDetailService
     {
-        string createOrderID();
-        bool AddNewOrder(Order order);
-        Order Search(string orderID);
+        bool AddNewOrderDetails(List<OrderDetail> orderDetailList);
+        List<OrderDetail> GetOrderDetail(string orderID);
     }
 }

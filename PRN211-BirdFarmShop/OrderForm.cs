@@ -22,8 +22,11 @@ namespace PRN211_BirdFarmShop
     {
         private IProductService _productService;
         private IOrderService _orderService;
+        private IOrderDetailService _orderDetailService;
         private IAccountService _accountService;
         List<OrderDetail> orderDetailList = new List<OrderDetail>();
+
+        int totalItem = 0;
         double totalOrder = 0;
 
         public OrderForm()
@@ -31,13 +34,12 @@ namespace PRN211_BirdFarmShop
             InitializeComponent();
             _productService = new ProductService();
             _orderService = new OrderService();
+            _orderDetailService = new OrderDetailService();
             _accountService = new AccountService();
-        }
-
-        private void OrderForm_Load(object sender, EventArgs e)
-        {
             btn_ThemSanPham.Enabled = false;
             btn_LuuHoaDon.Enabled = false;
+            btn_HuyHoaDon.Enabled = false;
+            btn_InHoaDon.Enabled = false;
             cbx_EmailNhanVien.DataSource = _accountService.getAllAccountByRole(Constants.IsStaff);
             cbx_EmailNhanVien.DisplayMember = "Email";
             cbx_EmailNhanVien.ValueMember = "Email";
@@ -45,6 +47,18 @@ namespace PRN211_BirdFarmShop
             cbx_SoDienThoai.DisplayMember = "Phone";
             cbx_SoDienThoai.ValueMember = "Phone";
         }
+
+        private void OrderForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //void Reset()
+        //{
+        //    txt_MaHoaDon.Text = string.Empty;
+        //    cbx_MaHang.Text = string.Empty;
+        //}
+
         private void cbx_MaHang_SelectedValueChanged(object sender, EventArgs e)
         {
             Product pro = _productService.GetProduct(cbx_MaHang.SelectedValue.ToString());
@@ -130,8 +144,11 @@ namespace PRN211_BirdFarmShop
             cbx_MaHang.DataSource = _productService.GetAllProduct();
             cbx_MaHang.DisplayMember = "ProductId";
             cbx_MaHang.ValueMember = "ProductId";
+            orderDetailList.Clear();
+            dtg_OrderDetailList.DataSource = null;
             btn_ThemSanPham.Enabled = true;
             btn_LuuHoaDon.Enabled = true;
+            btn_InHoaDon.Enabled = true;
         }
 
         private void loadDataGridView()
@@ -168,14 +185,13 @@ namespace PRN211_BirdFarmShop
             orderDetail.Product.ProductName = txt_TenHang.Text.ToString();
             orderDetail.Quantity = qtyBuy;
             orderDetail.Price = Convert.ToDouble(txt_DonGia.Text.ToString());
-            orderDetail.Total = Convert.ToInt32(txt_ThanhTien.Text.ToString());
+            orderDetail.Total = Convert.ToDouble(txt_ThanhTien.Text.ToString());
             orderDetailList.Add(orderDetail);
             loadDataGridView();
             totalOrder += orderDetail.Total;
+            totalItem += orderDetail.Quantity;
             txt_TongTien.Text = string.Format("{0:0,00}", totalOrder);
-            pro.QuantityAvailable = pro.QuantityAvailable - qtyBuy;
-            pro.QuantitySold = pro.QuantitySold + qtyBuy;
-            _productService.Update(pro.ProductId, pro);
+
         }
 
         private void dtg_OrderDetailList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -186,14 +202,76 @@ namespace PRN211_BirdFarmShop
                 string productId = dtg_OrderDetailList.Rows[rowIndex].Cells["ProductId"].Value.ToString();
                 int qtyBuy = Convert.ToInt32(dtg_OrderDetailList.Rows[rowIndex].Cells["Quantity"].Value.ToString());
                 totalOrder -= orderDetailList.Find(item => item.ProductId.Equals(productId)).Total;
+                totalItem -= orderDetailList.Find(item => item.ProductId.Equals(productId)).Quantity;
                 txt_TongTien.Text = string.Format("{0:0,00}", totalOrder);
                 orderDetailList.RemoveAll(item => item.ProductId.Equals(productId));
-                Product pro = _productService.GetProduct(productId);
-                pro.QuantityAvailable = pro.QuantityAvailable + qtyBuy;
-                pro.QuantitySold = pro.QuantitySold - qtyBuy;
-                _productService.Update(productId, pro);
                 loadDataGridView();
             }
+        }
+
+        private void btn_LuuHoaDon_Click(object sender, EventArgs e)
+        {
+            if (orderDetailList is null || orderDetailList.Count == 0)
+            {
+                MessageBox.Show("Hoá đơn chưa có sản phẩm, vui lòng chọn sản phẩm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            Order order = new Order();
+            order.OrderId = txt_MaHoaDon.Text;
+            order.Email = cbx_EmailNhanVien.SelectedValue.ToString();
+            order.StaffName = txt_TenNhanVien.Text;
+            order.CustomerPhone = cbx_SoDienThoai.SelectedValue.ToString();
+            order.CustomerName = txt_TenKhachHang.Text;
+            order.CreateDate = DateTime.Now;
+            order.TotalItem = totalItem;
+            order.TotalPrice = totalOrder;
+            if (_orderService.AddNewOrder(order) && _orderDetailService.AddNewOrderDetails(orderDetailList))
+            {
+                foreach (var item in orderDetailList)
+                {
+                    Product pro = _productService.GetProduct(item.ProductId);
+                    pro.QuantityAvailable = pro.QuantityAvailable - item.Quantity;
+                    pro.QuantitySold = pro.QuantitySold + item.Quantity;
+                    _productService.Update(pro.ProductId, pro);
+                }
+                MessageBox.Show("Lưu hoá đơn thành công!");
+            }
+        }
+
+        private void btn_TimKiem_Click(object sender, EventArgs e)
+        {
+            string orderID = txt_TimMaHH.Text;
+            Order order = _orderService.Search(orderID);
+            orderDetailList = _orderDetailService.GetOrderDetail(orderID)
+            .Select(od => new OrderDetail
+            {
+                ProductId = od.ProductId,
+                Product = od.Product,
+                Quantity = od.Quantity,
+                Price = od.Price,
+                Total = od.Total
+            })
+            .ToList();
+            if (order is not null && orderDetailList is not null)
+            {
+                txt_MaHoaDon.Text = order.OrderId;
+                cbx_EmailNhanVien.SelectedValue = order.Email;
+                txt_TenNhanVien.Text = order.StaffName;
+                cbx_SoDienThoai.SelectedValue = order.CustomerPhone;
+                txt_TenKhachHang.Text = order.CustomerName;
+                totalOrder = order.TotalPrice;
+                loadDataGridView();
+                btn_HuyHoaDon.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Hoá đơn không tồn tại!");
+            }
+        }
+
+        private void btn_Dong_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
 
 
