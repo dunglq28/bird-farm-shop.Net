@@ -64,6 +64,19 @@ namespace BFShopDAO
             }
         }
 
+        public bool DeleteOrderDetail(string orderID)
+        {
+            using (var context = new Bird_Farm_Shop_PRNContext())
+            {
+                var orderDetailList = context.OrderDetails.Where(od => od.OrderId.Equals(orderID)).ToList();
+                if (orderDetailList.Count == 0) return false;
+
+                context.OrderDetails.RemoveRange(orderDetailList);
+                return context.SaveChanges() > 0;
+            }
+        }
+
+
 
     }
 

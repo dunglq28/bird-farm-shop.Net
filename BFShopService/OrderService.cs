@@ -19,6 +19,7 @@ namespace BFShopService
 
         public bool AddNewOrder(Order order) => _orderRepository.AddNewOrder(order);
         public string createOrderID() => _orderRepository.createOrderID();
+        public bool DeleteOrder(string orderID) => _orderRepository.DeleteOrder(orderID);
         public Order Search(string orderID) => _orderRepository.Search(orderID);
 
     }

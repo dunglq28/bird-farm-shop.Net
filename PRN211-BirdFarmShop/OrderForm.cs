@@ -53,11 +53,18 @@ namespace PRN211_BirdFarmShop
 
         }
 
-        //void Reset()
-        //{
-        //    txt_MaHoaDon.Text = string.Empty;
-        //    cbx_MaHang.Text = string.Empty;
-        //}
+        void ResetForm()
+        {
+            txt_MaHoaDon.Text = string.Empty;
+            dt_NgayBan.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            cbx_MaHang.Text = string.Empty;
+            txt_DonGia.Text = string.Empty;
+            txt_GiongLoai.Text = string.Empty;
+            txt_SoLuong.Text = string.Empty;
+            txt_TongTien.Text = string.Empty;
+            orderDetailList.Clear();
+            dtg_OrderDetailList.DataSource = null;
+        }
 
         private void cbx_MaHang_SelectedValueChanged(object sender, EventArgs e)
         {
@@ -65,9 +72,9 @@ namespace PRN211_BirdFarmShop
             if (pro is not null)
             {
                 txt_TenHang.Text = pro.ProductName;
+                txt_GiongLoai.Text = pro.Category.CategoryName;
                 txt_DonGia.Text = String.Format("{0:0,00}", pro.Price);
                 txt_SoLuong.Text = "1";
-                txt_GiamGia.Text = "0";
                 txt_ThanhTien.Text = String.Format("{0:0,00}", pro.Price);
             }
         }
@@ -112,31 +119,14 @@ namespace PRN211_BirdFarmShop
                 return;
             }
             int sl;
-            float dg, gg, tt;
+            float dg, tt;
             sl = txt_SoLuong.Text == "" ? 0 : Int32.Parse(txt_SoLuong.Text);
-            gg = txt_GiamGia.Text == "" ? 0 : float.Parse(txt_GiamGia.Text);
             dg = float.Parse(txt_DonGia.Text);
-            tt = sl * (dg - dg * gg / 100);
+            tt = sl * dg;
             txt_ThanhTien.Text = tt == 0 ? "0" : String.Format("{0:0,00}", tt);
 
         }
 
-        private void txt_GiamGia_TextChanged(object sender, EventArgs e)
-        {
-            if (BFShopUtils.ContainsLettersOrSpecialCharacters(txt_GiamGia.Text))
-            {
-                MessageBox.Show("Phải nhập chữ số");
-                txt_GiamGia.Text = "0";
-                return;
-            }
-            int sl;
-            float dg, gg, tt;
-            sl = txt_SoLuong.Text == "" ? 0 : Int32.Parse(txt_SoLuong.Text);
-            gg = txt_GiamGia.Text == "" ? 0 : float.Parse(txt_GiamGia.Text);
-            dg = float.Parse(txt_DonGia.Text);
-            tt = sl * (dg - dg * gg / 100);
-            txt_ThanhTien.Text = tt == 0 ? "0" : String.Format("{0:0,00}", tt);
-        }
 
         private void btn_ThemHoaDon_Click(object sender, EventArgs e)
         {
@@ -144,15 +134,45 @@ namespace PRN211_BirdFarmShop
             cbx_MaHang.DataSource = _productService.GetAllProduct();
             cbx_MaHang.DisplayMember = "ProductId";
             cbx_MaHang.ValueMember = "ProductId";
+            dt_NgayBan.Text = DateTime.Now.ToString("dd-MM-yyyy");
+
             orderDetailList.Clear();
             dtg_OrderDetailList.DataSource = null;
+
+            loadOrderDetailListView();
+
             btn_ThemSanPham.Enabled = true;
             btn_LuuHoaDon.Enabled = true;
             btn_InHoaDon.Enabled = true;
+            btn_HuyHoaDon.Enabled = false;
         }
 
-        private void loadDataGridView()
+        private void loadOrderDetailListView()
         {
+            if (dtg_OrderDetailList.Columns.Count == 0)
+            {
+                dtg_OrderDetailList.Columns.Add("ProductId", "Mã hàng");
+                dtg_OrderDetailList.Columns.Add("ProductName", "Tên hàng");
+                dtg_OrderDetailList.Columns.Add("Quantity", "Số lượng");
+                dtg_OrderDetailList.Columns.Add("Price", "Đơn giá");
+                dtg_OrderDetailList.Columns.Add("Total", "Thành tiền");
+
+                dtg_OrderDetailList.Columns[0].Width = 200;
+                dtg_OrderDetailList.Columns[1].Width = 250;
+                dtg_OrderDetailList.Columns[2].Width = 200;
+                dtg_OrderDetailList.Columns[3].Width = 200;
+                dtg_OrderDetailList.Columns[4].Width = 200;
+
+                dtg_OrderDetailList.AutoGenerateColumns = true;
+
+                // Tên hiển thị của cột
+                dtg_OrderDetailList.Columns["ProductId"].HeaderText = "Mã hàng";
+                dtg_OrderDetailList.Columns["ProductName"].HeaderText = "Tên hàng";
+                dtg_OrderDetailList.Columns["Quantity"].HeaderText = "Số lượng";
+                dtg_OrderDetailList.Columns["Price"].HeaderText = "Đơn giá";
+                dtg_OrderDetailList.Columns["Total"].HeaderText = "Thành tiền";
+            }
+            dtg_OrderDetailList.AutoGenerateColumns = false;
             dtg_OrderDetailList.DataSource = orderDetailList.Select(
                 p => new
                 {
@@ -180,14 +200,16 @@ namespace PRN211_BirdFarmShop
             }
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.Product = new Product();
+            orderDetail.Product.Category = new Category();
             orderDetail.OrderId = txt_MaHoaDon.Text.ToString();
             orderDetail.ProductId = cbx_MaHang.SelectedValue.ToString();
             orderDetail.Product.ProductName = txt_TenHang.Text.ToString();
+            orderDetail.Product.Category.CategoryName = txt_GiongLoai.Text.ToString();
             orderDetail.Quantity = qtyBuy;
             orderDetail.Price = Convert.ToDouble(txt_DonGia.Text.ToString());
             orderDetail.Total = Convert.ToDouble(txt_ThanhTien.Text.ToString());
             orderDetailList.Add(orderDetail);
-            loadDataGridView();
+            loadOrderDetailListView();
             totalOrder += orderDetail.Total;
             totalItem += orderDetail.Quantity;
             txt_TongTien.Text = string.Format("{0:0,00}", totalOrder);
@@ -205,7 +227,7 @@ namespace PRN211_BirdFarmShop
                 totalItem -= orderDetailList.Find(item => item.ProductId.Equals(productId)).Quantity;
                 txt_TongTien.Text = string.Format("{0:0,00}", totalOrder);
                 orderDetailList.RemoveAll(item => item.ProductId.Equals(productId));
-                loadDataGridView();
+                loadOrderDetailListView();
             }
         }
 
@@ -255,13 +277,17 @@ namespace PRN211_BirdFarmShop
             if (order is not null && orderDetailList is not null)
             {
                 txt_MaHoaDon.Text = order.OrderId;
+                dt_NgayBan.Text = order.CreateDate.HasValue ? order.CreateDate.Value.ToString("dd-MM-yyyy") : string.Empty;
                 cbx_EmailNhanVien.SelectedValue = order.Email;
                 txt_TenNhanVien.Text = order.StaffName;
                 cbx_SoDienThoai.SelectedValue = order.CustomerPhone;
                 txt_TenKhachHang.Text = order.CustomerName;
                 totalOrder = order.TotalPrice;
-                loadDataGridView();
+                loadOrderDetailListView();
                 btn_HuyHoaDon.Enabled = true;
+                btn_InHoaDon.Enabled = true;
+                btn_ThemSanPham.Enabled = false;
+                btn_LuuHoaDon.Enabled = false;
             }
             else
             {
@@ -269,11 +295,27 @@ namespace PRN211_BirdFarmShop
             }
         }
 
+        private void btn_HuyHoaDon_Click(object sender, EventArgs e)
+        {
+            if (_orderDetailService.DeleteOrderDetail(txt_MaHoaDon.Text.ToString())
+                && _orderService.DeleteOrder(txt_MaHoaDon.Text.ToString()))
+            {
+                MessageBox.Show("Huỷ hoá đơn thành công!");
+            }
+            foreach (var item in orderDetailList)
+            {
+                Product pro = _productService.GetProduct(item.ProductId);
+                pro.QuantityAvailable = pro.QuantityAvailable + item.Quantity;
+                pro.QuantitySold = pro.QuantitySold - item.Quantity;
+                _productService.Update(pro.ProductId, pro);
+            }
+            ResetForm();
+            loadOrderDetailListView();
+        }
+
         private void btn_Dong_Click(object sender, EventArgs e)
         {
             this.Dispose();
         }
-
-
     }
 }

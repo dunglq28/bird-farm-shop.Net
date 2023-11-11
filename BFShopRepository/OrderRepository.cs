@@ -12,6 +12,7 @@ namespace BFShopRepository
     {
         public bool AddNewOrder(Order order) => OrderDAO.Instance.AddNewOrder(order);
         public string createOrderID() => OrderDAO.Instance.createOrderID();
+        public bool DeleteOrder(string orderID) => OrderDAO.Instance.DeleteOrder(orderID);
         public Order Search(string orderID) => OrderDAO.Instance.Search(orderID);
 
     }

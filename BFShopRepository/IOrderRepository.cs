@@ -12,5 +12,6 @@ namespace BFShopRepository
         string createOrderID();
         bool AddNewOrder(Order order);
         Order Search(string orderID);
+        bool DeleteOrder(string orderID);
     }
 }

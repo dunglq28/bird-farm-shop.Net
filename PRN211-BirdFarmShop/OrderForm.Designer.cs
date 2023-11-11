@@ -38,7 +38,7 @@ namespace PRN211_BirdFarmShop
             label15 = new Label();
             cbx_EmailNhanVien = new ComboBox();
             txt_TenNhanVien = new TextBox();
-            dateTimePicker1 = new DateTimePicker();
+            dt_NgayBan = new DateTimePicker();
             txt_MaHoaDon = new TextBox();
             label3 = new Label();
             label5 = new Label();
@@ -50,11 +50,10 @@ namespace PRN211_BirdFarmShop
             label12 = new Label();
             dtg_OrderDetailList = new DataGridView();
             ProductId = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
+            ProductName = new DataGridViewTextBoxColumn();
             Quantity = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
+            Price = new DataGridViewTextBoxColumn();
+            Total = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
             btn_Dong = new Button();
             btn_InHoaDon = new Button();
@@ -63,6 +62,8 @@ namespace PRN211_BirdFarmShop
             btn_ThemSanPham = new Button();
             btn_ThemHoaDon = new Button();
             panel2 = new Panel();
+            txt_GiongLoai = new TextBox();
+            label17 = new Label();
             txt_SoLuong = new TextBox();
             txt_DonGia = new TextBox();
             txt_ThanhTien = new TextBox();
@@ -71,9 +72,7 @@ namespace PRN211_BirdFarmShop
             label6 = new Label();
             label11 = new Label();
             txt_TenHang = new TextBox();
-            txt_GiamGia = new TextBox();
             label7 = new Label();
-            label9 = new Label();
             label8 = new Label();
             txt_TimMaHH = new TextBox();
             btn_TimKiem = new Button();
@@ -127,7 +126,7 @@ namespace PRN211_BirdFarmShop
             groupBox1.Controls.Add(label15);
             groupBox1.Controls.Add(cbx_EmailNhanVien);
             groupBox1.Controls.Add(txt_TenNhanVien);
-            groupBox1.Controls.Add(dateTimePicker1);
+            groupBox1.Controls.Add(dt_NgayBan);
             groupBox1.Controls.Add(txt_MaHoaDon);
             groupBox1.Controls.Add(label3);
             groupBox1.Controls.Add(label5);
@@ -197,13 +196,14 @@ namespace PRN211_BirdFarmShop
             txt_TenNhanVien.Size = new Size(266, 31);
             txt_TenNhanVien.TabIndex = 8;
             // 
-            // dateTimePicker1
+            // dt_NgayBan
             // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(214, 74);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(266, 31);
-            dateTimePicker1.TabIndex = 7;
+            dt_NgayBan.Enabled = false;
+            dt_NgayBan.Format = DateTimePickerFormat.Short;
+            dt_NgayBan.Location = new Point(214, 74);
+            dt_NgayBan.Name = "dt_NgayBan";
+            dt_NgayBan.Size = new Size(266, 31);
+            dt_NgayBan.TabIndex = 7;
             // 
             // txt_MaHoaDon
             // 
@@ -308,7 +308,7 @@ namespace PRN211_BirdFarmShop
             dtg_OrderDetailList.BackgroundColor = Color.White;
             dtg_OrderDetailList.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
             dtg_OrderDetailList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtg_OrderDetailList.Columns.AddRange(new DataGridViewColumn[] { ProductId, Column2, Quantity, Column4, Column5, Column6 });
+            dtg_OrderDetailList.Columns.AddRange(new DataGridViewColumn[] { ProductId, ProductName, Quantity, Price, Total });
             dtg_OrderDetailList.GridColor = SystemColors.ControlLight;
             dtg_OrderDetailList.Location = new Point(6, 146);
             dtg_OrderDetailList.Name = "dtg_OrderDetailList";
@@ -326,13 +326,13 @@ namespace PRN211_BirdFarmShop
             ProductId.Name = "ProductId";
             ProductId.Width = 200;
             // 
-            // Column2
+            // ProductName
             // 
-            Column2.DataPropertyName = "ProductName";
-            Column2.HeaderText = "Tên hàng";
-            Column2.MinimumWidth = 8;
-            Column2.Name = "Column2";
-            Column2.Width = 255;
+            ProductName.DataPropertyName = "ProductName";
+            ProductName.HeaderText = "Tên hàng";
+            ProductName.MinimumWidth = 8;
+            ProductName.Name = "ProductName";
+            ProductName.Width = 250;
             // 
             // Quantity
             // 
@@ -340,31 +340,23 @@ namespace PRN211_BirdFarmShop
             Quantity.HeaderText = "Số lượng";
             Quantity.MinimumWidth = 8;
             Quantity.Name = "Quantity";
-            Quantity.Width = 150;
+            Quantity.Width = 200;
             // 
-            // Column4
+            // Price
             // 
-            Column4.DataPropertyName = "Price";
-            Column4.HeaderText = "Đơn giá";
-            Column4.MinimumWidth = 8;
-            Column4.Name = "Column4";
-            Column4.Width = 185;
+            Price.DataPropertyName = "Price";
+            Price.HeaderText = "Đơn giá";
+            Price.MinimumWidth = 8;
+            Price.Name = "Price";
+            Price.Width = 200;
             // 
-            // Column5
+            // Total
             // 
-            Column5.DataPropertyName = "Discount";
-            Column5.HeaderText = "Giảm giá";
-            Column5.MinimumWidth = 8;
-            Column5.Name = "Column5";
-            Column5.Width = 150;
-            // 
-            // Column6
-            // 
-            Column6.DataPropertyName = "Total";
-            Column6.HeaderText = "Thành tiền";
-            Column6.MinimumWidth = 8;
-            Column6.Name = "Column6";
-            Column6.Width = 185;
+            Total.DataPropertyName = "Total";
+            Total.HeaderText = "Thành tiền";
+            Total.MinimumWidth = 8;
+            Total.Name = "Total";
+            Total.Width = 200;
             // 
             // panel1
             // 
@@ -418,6 +410,7 @@ namespace PRN211_BirdFarmShop
             btn_HuyHoaDon.TabIndex = 4;
             btn_HuyHoaDon.Text = "Huỷ hoá đơn";
             btn_HuyHoaDon.UseVisualStyleBackColor = true;
+            btn_HuyHoaDon.Click += btn_HuyHoaDon_Click;
             // 
             // btn_LuuHoaDon
             // 
@@ -465,6 +458,8 @@ namespace PRN211_BirdFarmShop
             // 
             // panel2
             // 
+            panel2.Controls.Add(txt_GiongLoai);
+            panel2.Controls.Add(label17);
             panel2.Controls.Add(txt_SoLuong);
             panel2.Controls.Add(txt_DonGia);
             panel2.Controls.Add(txt_ThanhTien);
@@ -473,14 +468,31 @@ namespace PRN211_BirdFarmShop
             panel2.Controls.Add(label6);
             panel2.Controls.Add(label11);
             panel2.Controls.Add(txt_TenHang);
-            panel2.Controls.Add(txt_GiamGia);
             panel2.Controls.Add(label7);
-            panel2.Controls.Add(label9);
             panel2.Controls.Add(label8);
             panel2.Location = new Point(8, 30);
             panel2.Name = "panel2";
             panel2.Size = new Size(1197, 110);
             panel2.TabIndex = 27;
+            // 
+            // txt_GiongLoai
+            // 
+            txt_GiongLoai.Location = new Point(944, 13);
+            txt_GiongLoai.Name = "txt_GiongLoai";
+            txt_GiongLoai.ReadOnly = true;
+            txt_GiongLoai.Size = new Size(212, 31);
+            txt_GiongLoai.TabIndex = 27;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label17.ForeColor = Color.FromArgb(0, 117, 214);
+            label17.Location = new Point(828, 16);
+            label17.Name = "label17";
+            label17.Size = new Size(110, 28);
+            label17.TabIndex = 26;
+            label17.Text = "Giống loài:";
             // 
             // txt_SoLuong
             // 
@@ -492,7 +504,7 @@ namespace PRN211_BirdFarmShop
             // 
             // txt_DonGia
             // 
-            txt_DonGia.Location = new Point(944, 21);
+            txt_DonGia.Location = new Point(556, 67);
             txt_DonGia.Name = "txt_DonGia";
             txt_DonGia.ReadOnly = true;
             txt_DonGia.Size = new Size(212, 31);
@@ -511,7 +523,7 @@ namespace PRN211_BirdFarmShop
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label10.ForeColor = Color.FromArgb(0, 117, 214);
-            label10.Location = new Point(828, 24);
+            label10.Location = new Point(410, 70);
             label10.Name = "label10";
             label10.Size = new Size(88, 28);
             label10.TabIndex = 17;
@@ -556,14 +568,6 @@ namespace PRN211_BirdFarmShop
             txt_TenHang.Size = new Size(212, 31);
             txt_TenHang.TabIndex = 22;
             // 
-            // txt_GiamGia
-            // 
-            txt_GiamGia.Location = new Point(556, 64);
-            txt_GiamGia.Name = "txt_GiamGia";
-            txt_GiamGia.Size = new Size(212, 31);
-            txt_GiamGia.TabIndex = 23;
-            txt_GiamGia.TextChanged += txt_GiamGia_TextChanged;
-            // 
             // label7
             // 
             label7.AutoSize = true;
@@ -574,17 +578,6 @@ namespace PRN211_BirdFarmShop
             label7.Size = new Size(99, 28);
             label7.TabIndex = 11;
             label7.Text = "Số lượng:";
-            // 
-            // label9
-            // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.ForeColor = Color.FromArgb(0, 117, 214);
-            label9.Location = new Point(410, 67);
-            label9.Name = "label9";
-            label9.Size = new Size(120, 28);
-            label9.TabIndex = 14;
-            label9.Text = "Giảm giá %:";
             // 
             // label8
             // 
@@ -666,7 +659,7 @@ namespace PRN211_BirdFarmShop
         private Label label5;
         private Label label4;
         private Label label2;
-        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dt_NgayBan;
         private TextBox txt_MaHoaDon;
         private ComboBox cbx_EmailNhanVien;
         private TextBox txt_TenNhanVien;
@@ -676,12 +669,10 @@ namespace PRN211_BirdFarmShop
         private TextBox txt_SoLuong;
         private Label label11;
         private Label label10;
-        private Label label9;
         private Label label8;
         private Label label7;
         private TextBox txt_ThanhTien;
         private TextBox txt_DonGia;
-        private TextBox txt_GiamGia;
         private TextBox txt_TenHang;
         private Panel panel1;
         private Panel panel2;
@@ -700,14 +691,18 @@ namespace PRN211_BirdFarmShop
         private Label label15;
         private Button btn_InHoaDon;
         private Button btn_HuyHoaDon;
-        private DataGridViewTextBoxColumn ProductId;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Quantity;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column6;
         private Button btn_Dong;
         private Button btn_TimKiem;
         private Label label14;
+        private TextBox txt_GiongLoai;
+        private Label label17;
+        private DataGridViewTextBoxColumn Column2;
+        private DataGridViewTextBoxColumn Column4;
+        private DataGridViewTextBoxColumn Column6;
+        private DataGridViewTextBoxColumn ProductId;
+        private DataGridViewTextBoxColumn ProductName;
+        private DataGridViewTextBoxColumn Quantity;
+        private DataGridViewTextBoxColumn Price;
+        private DataGridViewTextBoxColumn Total;
     }
 }

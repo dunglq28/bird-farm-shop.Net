@@ -18,6 +18,9 @@ namespace BFShopService
         public bool AddNewOrderDetails(List<OrderDetail> orderDetailList)
                 => _orderDetailRepository.AddNewOrderDetails(orderDetailList);
 
+        public bool DeleteOrderDetail(string orderID)
+                => _orderDetailRepository.DeleteOrderDetail(orderID);
+
         public List<OrderDetail> GetOrderDetail(string orderID)
                 => _orderDetailRepository.GetOrderDetail(orderID);
     }

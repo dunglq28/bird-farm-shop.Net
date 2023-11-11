@@ -11,5 +11,6 @@ namespace BFShopService
     {
         bool AddNewOrderDetails(List<OrderDetail> orderDetailList);
         List<OrderDetail> GetOrderDetail(string orderID);
+        bool DeleteOrderDetail(string orderID);
     }
 }
