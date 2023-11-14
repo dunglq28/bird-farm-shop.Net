@@ -3,7 +3,10 @@ using BFShopBussinessObjects.Entities;
 using BFShopBussinessObjects.Utils;
 using BFShopRepository;
 using BFShopService;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,9 +15,11 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace PRN211_BirdFarmShop
 {
@@ -39,18 +44,22 @@ namespace PRN211_BirdFarmShop
             btn_ThemSanPham.Enabled = false;
             btn_LuuHoaDon.Enabled = false;
             btn_HuyHoaDon.Enabled = false;
-            btn_InHoaDon.Enabled = false;
+            btn_LưuFile.Enabled = false;
             cbx_EmailNhanVien.DataSource = _accountService.getAllAccountByRole(Constants.IsStaff);
             cbx_EmailNhanVien.DisplayMember = "Email";
             cbx_EmailNhanVien.ValueMember = "Email";
             cbx_SoDienThoai.DataSource = _accountService.getAllAccountByRole(Constants.IsCustomer);
             cbx_SoDienThoai.DisplayMember = "Phone";
             cbx_SoDienThoai.ValueMember = "Phone";
+            SetEPPlusLicense();
+        }
+        private void SetEPPlusLicense()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
-
         }
 
         void ResetForm()
@@ -134,7 +143,7 @@ namespace PRN211_BirdFarmShop
             cbx_MaHang.DataSource = _productService.GetAllProduct();
             cbx_MaHang.DisplayMember = "ProductId";
             cbx_MaHang.ValueMember = "ProductId";
-            dt_NgayBan.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            dt_NgayBan.Text = DateTime.Now.ToString();
 
             orderDetailList.Clear();
             dtg_OrderDetailList.DataSource = null;
@@ -143,7 +152,7 @@ namespace PRN211_BirdFarmShop
 
             btn_ThemSanPham.Enabled = true;
             btn_LuuHoaDon.Enabled = true;
-            btn_InHoaDon.Enabled = true;
+            btn_LưuFile.Enabled = true;
             btn_HuyHoaDon.Enabled = false;
         }
 
@@ -238,6 +247,11 @@ namespace PRN211_BirdFarmShop
                 MessageBox.Show("Hoá đơn chưa có sản phẩm, vui lòng chọn sản phẩm", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            if (_orderService.Search(txt_MaHoaDon.Text.ToString()) is not null)
+            {
+                MessageBox.Show("Hoá đơn đã tồn tại, vui lòng thêm mới hoá đơn", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             Order order = new Order();
             order.OrderId = txt_MaHoaDon.Text;
             order.Email = cbx_EmailNhanVien.SelectedValue.ToString();
@@ -285,7 +299,7 @@ namespace PRN211_BirdFarmShop
                 totalOrder = order.TotalPrice;
                 loadOrderDetailListView();
                 btn_HuyHoaDon.Enabled = true;
-                btn_InHoaDon.Enabled = true;
+                btn_LưuFile.Enabled = true;
                 btn_ThemSanPham.Enabled = false;
                 btn_LuuHoaDon.Enabled = false;
             }
@@ -313,9 +327,157 @@ namespace PRN211_BirdFarmShop
             loadOrderDetailListView();
         }
 
+        private void DeleteContentExcelFile(string filePath)
+        {
+            using (var package = new ExcelPackage(new FileInfo(filePath)))
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+
+                var allCells = worksheet.Cells;
+
+                foreach (var cell in allCells)
+                {
+                    cell.Value = null;
+                }
+
+                package.Save();
+            }
+        }
+
+        private void OpenExcelFile(string filePath, Order order, List<OrderDetail> odList)
+        {
+            try
+            {
+                using (var package = new ExcelPackage(new FileInfo(filePath)))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                    worksheet.Cells["A1:Z300"].Style.Font.Name = "Times new roman"; // Font chữ
+                    worksheet.Cells["A1:B3"].Style.Font.Size = 10;
+                    worksheet.Cells["A1:B3"].Style.Font.Bold = true;
+                    worksheet.Cells["A1:B3"].Style.Font.Color.SetColor(Color.Blue); // Màu xanh da trời
+                    worksheet.Column(1).Width = 7;
+                    worksheet.Column(2).Width = 15;
+                    worksheet.Column(4).Width = 30;
+                    worksheet.Cells["A1:B1"].Merge = true;
+                    worksheet.Cells["A1:B1"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    worksheet.Cells["A1:B1"].Value = "Trang trại chim";
+                    worksheet.Cells["A2:B2"].Merge = true;
+                    worksheet.Cells["A2:B2"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    worksheet.Cells["A2:B2"].Value = "Gò Vấp - Hồ Chí Minh";
+                    worksheet.Cells["A3:B3"].Merge = true;
+                    worksheet.Cells["A3:B3"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    worksheet.Cells["A3:B3"].Value = "Điện thoại: 0961287613";
+                    worksheet.Cells["C2:E2"].Style.Font.Size = 16;
+                    worksheet.Cells["C2:E2"].Style.Font.Bold = true;
+                    worksheet.Cells["C2:E2"].Style.Font.Color.SetColor(Color.Red); // Màu đỏ
+                    worksheet.Cells["C2:E2"].Merge = true;
+                    worksheet.Cells["C2:E2"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    worksheet.Cells["C2:E2"].Value = "HÓA ĐƠN BÁN";
+
+                    int startRow = 6;
+                    worksheet.Cells[$"B{startRow}:C{startRow + 3}"].Style.Font.Size = 12;
+
+                    worksheet.Cells[$"B{startRow}:B{startRow}"].Value = "Mã hóa đơn:";
+                    worksheet.Cells[$"C{startRow}:E{startRow}"].Merge = true;
+                    worksheet.Cells[$"C{startRow}:E{startRow}"].Value = order.OrderId;
+
+                    worksheet.Cells[$"B{startRow + 1}:B{startRow + 1}"].Value = "Khách hàng:";
+                    worksheet.Cells[$"C{startRow + 1}:E{startRow + 1}"].Merge = true;
+                    worksheet.Cells[$"C{startRow + 1}:E{startRow + 1}"].Value = order.CustomerName;
+
+                    worksheet.Cells[$"B{startRow + 2}:B{startRow + 2}"].Value = "Điện thoại:";
+                    worksheet.Cells[$"C{startRow + 2}:E{startRow + 2}"].Merge = true;
+                    worksheet.Cells[$"C{startRow + 2}:E{startRow + 2}"].Value = order.CustomerPhone;
+
+                    worksheet.Cells["A11:F11"].Style.Font.Bold = true;
+                    worksheet.Cells["A11:F11"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                    for (global::System.Int32 i = 1; i < 5; i++)
+                    {
+                        worksheet.Column(i).Width = 20;
+                    }
+                    worksheet.Cells["A11:A11"].Value = "STT";
+                    worksheet.Cells["B11:B11"].Value = "Tên hàng";
+                    worksheet.Cells["C11:C11"].Value = "Số lượng";
+                    worksheet.Cells["D11:D11"].Value = "Đơn giá";
+                    worksheet.Cells["E11:E11"].Value = "Thành tiền";
+
+                    startRow = 12;
+                    int col = 0;
+
+                    for (int hang = 0; hang < odList.Count; hang++)
+                    {
+                        worksheet.Cells[$"A{startRow + hang}"].Value = hang + 1;
+                        worksheet.Cells[$"B{startRow + hang}"].Value = odList[hang].Product.ProductName;
+                        worksheet.Cells[$"C{startRow + hang}"].Value = odList[hang].Quantity;
+                        worksheet.Cells[$"D{startRow + hang}"].Value = string.Format("{0:0,00}", odList[hang].Price);
+                        worksheet.Cells[$"D{startRow + hang}"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        worksheet.Cells[$"E{startRow + hang}"].Value = string.Format("{0:0,00}", odList[hang].Total);
+                        worksheet.Cells[$"E{startRow + hang}"].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                        col = startRow + hang + 2;
+                    }
+
+                    int row = 4;
+
+                    ExcelRange exRange = worksheet.Cells[col, row];
+                    exRange.Style.Font.Bold = true;
+                    exRange.Value = "Tổng tiền:";
+                    exRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                    exRange = worksheet.Cells[col, row + 1];
+                    exRange.Style.Font.Bold = true;
+                    exRange.Value = string.Format("{0:0,00}", order.TotalPrice);
+                    exRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+                    exRange = worksheet.Cells[col + 1, row];
+                    exRange.Merge = true;
+                    exRange.Style.Font.Italic = true;
+                    exRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    DateTime d = Convert.ToDateTime(order.CreateDate);
+                    exRange.Value = "Hồ Chí Minh, ngày " + d.Day + " tháng " + d.Month + " năm " + d.Year;
+
+                    exRange = worksheet.Cells[col + 2, row];
+                    exRange.Merge = true;
+                    exRange.Style.Font.Italic = true;
+                    exRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                    exRange.Value = "Nhân viên bán hàng: " + order.StaffName;
+
+
+                    package.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btn_LưuFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            Order order = _orderService.Search(txt_MaHoaDon.Text.ToString());
+            orderDetailList = _orderDetailService.GetOrderDetail(txt_MaHoaDon.Text.ToString());
+            if (order is not null)
+            {
+                DeleteContentExcelFile("D:\\C# source\\PRN211-BirdFarmShop\\Order.xlsx");
+                OpenExcelFile("D:\\C# source\\PRN211-BirdFarmShop\\Order.xlsx", order, orderDetailList);
+                MessageBox.Show("In hoá đơn thành công");
+            }
+            else
+            {
+                MessageBox.Show("Hoá đơn không tồn tại!");
+            }
+
+        }
+
         private void btn_Dong_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void btn_XemSP_Click(object sender, EventArgs e)
+        {
+            ProductMangementForm productfrm = new ProductMangementForm();
+            productfrm.Show();
         }
     }
 }

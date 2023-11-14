@@ -56,7 +56,7 @@ namespace PRN211_BirdFarmShop
             Total = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
             btn_Dong = new Button();
-            btn_InHoaDon = new Button();
+            btn_LưuFile = new Button();
             btn_HuyHoaDon = new Button();
             btn_LuuHoaDon = new Button();
             btn_ThemSanPham = new Button();
@@ -77,6 +77,8 @@ namespace PRN211_BirdFarmShop
             txt_TimMaHH = new TextBox();
             btn_TimKiem = new Button();
             label14 = new Label();
+            btn_XemSP = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -93,7 +95,7 @@ namespace PRN211_BirdFarmShop
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.FromArgb(0, 117, 214);
-            label1.Location = new Point(418, 8);
+            label1.Location = new Point(654, 8);
             label1.Name = "label1";
             label1.Size = new Size(358, 45);
             label1.TabIndex = 0;
@@ -114,8 +116,8 @@ namespace PRN211_BirdFarmShop
             // 
             splitContainer1.Panel2.Controls.Add(groupBox2);
             splitContainer1.Panel2.Paint += splitContainer1_Panel2_Paint;
-            splitContainer1.Size = new Size(1207, 702);
-            splitContainer1.SplitterDistance = 250;
+            splitContainer1.Size = new Size(1566, 841);
+            splitContainer1.SplitterDistance = 299;
             splitContainer1.TabIndex = 1;
             // 
             // groupBox1
@@ -134,7 +136,7 @@ namespace PRN211_BirdFarmShop
             groupBox1.Controls.Add(label2);
             groupBox1.Location = new Point(8, 56);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1197, 191);
+            groupBox1.Size = new Size(1555, 213);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
             groupBox1.Text = "Thông tin chung";
@@ -142,9 +144,10 @@ namespace PRN211_BirdFarmShop
             // 
             // txt_TenKhachHang
             // 
-            txt_TenKhachHang.Location = new Point(846, 74);
+            txt_TenKhachHang.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_TenKhachHang.Location = new Point(1196, 85);
             txt_TenKhachHang.Name = "txt_TenKhachHang";
-            txt_TenKhachHang.Size = new Size(266, 31);
+            txt_TenKhachHang.Size = new Size(266, 39);
             txt_TenKhachHang.TabIndex = 13;
             // 
             // label16
@@ -152,7 +155,7 @@ namespace PRN211_BirdFarmShop
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label16.ForeColor = Color.FromArgb(0, 117, 214);
-            label16.Location = new Point(658, 77);
+            label16.Location = new Point(944, 96);
             label16.Name = "label16";
             label16.Size = new Size(156, 28);
             label16.TabIndex = 12;
@@ -161,10 +164,11 @@ namespace PRN211_BirdFarmShop
             // cbx_SoDienThoai
             // 
             cbx_SoDienThoai.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbx_SoDienThoai.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cbx_SoDienThoai.FormattingEnabled = true;
-            cbx_SoDienThoai.Location = new Point(846, 32);
+            cbx_SoDienThoai.Location = new Point(1196, 30);
             cbx_SoDienThoai.Name = "cbx_SoDienThoai";
-            cbx_SoDienThoai.Size = new Size(266, 33);
+            cbx_SoDienThoai.Size = new Size(266, 40);
             cbx_SoDienThoai.TabIndex = 11;
             cbx_SoDienThoai.SelectedValueChanged += cbx_SoDienThoai_SelectedValueChanged;
             // 
@@ -173,7 +177,7 @@ namespace PRN211_BirdFarmShop
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label15.ForeColor = Color.FromArgb(0, 117, 214);
-            label15.Location = new Point(658, 37);
+            label15.Location = new Point(944, 45);
             label15.Name = "label15";
             label15.Size = new Size(138, 28);
             label15.TabIndex = 10;
@@ -182,35 +186,39 @@ namespace PRN211_BirdFarmShop
             // cbx_EmailNhanVien
             // 
             cbx_EmailNhanVien.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cbx_EmailNhanVien.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cbx_EmailNhanVien.FormattingEnabled = true;
-            cbx_EmailNhanVien.Location = new Point(214, 114);
+            cbx_EmailNhanVien.Location = new Point(296, 90);
             cbx_EmailNhanVien.Name = "cbx_EmailNhanVien";
-            cbx_EmailNhanVien.Size = new Size(266, 33);
+            cbx_EmailNhanVien.Size = new Size(266, 40);
             cbx_EmailNhanVien.TabIndex = 9;
             cbx_EmailNhanVien.SelectedValueChanged += cbx_EmailNhanVien_SelectedValueChanged;
             // 
             // txt_TenNhanVien
             // 
-            txt_TenNhanVien.Location = new Point(214, 154);
+            txt_TenNhanVien.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_TenNhanVien.Location = new Point(296, 143);
             txt_TenNhanVien.Name = "txt_TenNhanVien";
-            txt_TenNhanVien.Size = new Size(266, 31);
+            txt_TenNhanVien.Size = new Size(266, 39);
             txt_TenNhanVien.TabIndex = 8;
             // 
             // dt_NgayBan
             // 
             dt_NgayBan.Enabled = false;
+            dt_NgayBan.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             dt_NgayBan.Format = DateTimePickerFormat.Short;
-            dt_NgayBan.Location = new Point(214, 74);
+            dt_NgayBan.Location = new Point(1196, 143);
             dt_NgayBan.Name = "dt_NgayBan";
-            dt_NgayBan.Size = new Size(266, 31);
+            dt_NgayBan.Size = new Size(266, 39);
             dt_NgayBan.TabIndex = 7;
             // 
             // txt_MaHoaDon
             // 
-            txt_MaHoaDon.Location = new Point(214, 34);
+            txt_MaHoaDon.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_MaHoaDon.Location = new Point(296, 31);
             txt_MaHoaDon.Name = "txt_MaHoaDon";
             txt_MaHoaDon.ReadOnly = true;
-            txt_MaHoaDon.Size = new Size(266, 31);
+            txt_MaHoaDon.Size = new Size(266, 39);
             txt_MaHoaDon.TabIndex = 6;
             // 
             // label3
@@ -218,7 +226,7 @@ namespace PRN211_BirdFarmShop
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.FromArgb(0, 117, 214);
-            label3.Location = new Point(38, 157);
+            label3.Location = new Point(38, 154);
             label3.Name = "label3";
             label3.Size = new Size(145, 28);
             label3.TabIndex = 5;
@@ -229,7 +237,7 @@ namespace PRN211_BirdFarmShop
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.FromArgb(0, 117, 214);
-            label5.Location = new Point(38, 77);
+            label5.Location = new Point(944, 154);
             label5.Name = "label5";
             label5.Size = new Size(104, 28);
             label5.TabIndex = 4;
@@ -240,7 +248,7 @@ namespace PRN211_BirdFarmShop
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.FromArgb(0, 117, 214);
-            label4.Location = new Point(38, 119);
+            label4.Location = new Point(38, 102);
             label4.Name = "label4";
             label4.Size = new Size(161, 28);
             label4.TabIndex = 3;
@@ -251,7 +259,7 @@ namespace PRN211_BirdFarmShop
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.FromArgb(0, 117, 214);
-            label2.Location = new Point(38, 37);
+            label2.Location = new Point(38, 45);
             label2.Name = "label2";
             label2.Size = new Size(127, 28);
             label2.TabIndex = 1;
@@ -268,7 +276,7 @@ namespace PRN211_BirdFarmShop
             groupBox2.Dock = DockStyle.Fill;
             groupBox2.Location = new Point(0, 0);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1207, 448);
+            groupBox2.Size = new Size(1566, 538);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             groupBox2.Text = "Thông tin các mặt hàng";
@@ -278,7 +286,7 @@ namespace PRN211_BirdFarmShop
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = Color.Red;
-            label13.Location = new Point(13, 358);
+            label13.Location = new Point(193, 424);
             label13.Name = "label13";
             label13.Size = new Size(210, 21);
             label13.TabIndex = 29;
@@ -286,10 +294,11 @@ namespace PRN211_BirdFarmShop
             // 
             // txt_TongTien
             // 
-            txt_TongTien.Location = new Point(854, 352);
+            txt_TongTien.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_TongTien.Location = new Point(1094, 406);
             txt_TongTien.Name = "txt_TongTien";
             txt_TongTien.ReadOnly = true;
-            txt_TongTien.Size = new Size(212, 31);
+            txt_TongTien.Size = new Size(248, 39);
             txt_TongTien.TabIndex = 26;
             // 
             // label12
@@ -297,7 +306,7 @@ namespace PRN211_BirdFarmShop
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label12.ForeColor = Color.FromArgb(0, 117, 214);
-            label12.Location = new Point(732, 355);
+            label12.Location = new Point(971, 417);
             label12.Name = "label12";
             label12.Size = new Size(105, 28);
             label12.TabIndex = 26;
@@ -310,11 +319,11 @@ namespace PRN211_BirdFarmShop
             dtg_OrderDetailList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtg_OrderDetailList.Columns.AddRange(new DataGridViewColumn[] { ProductId, ProductName, Quantity, Price, Total });
             dtg_OrderDetailList.GridColor = SystemColors.ControlLight;
-            dtg_OrderDetailList.Location = new Point(6, 146);
+            dtg_OrderDetailList.Location = new Point(222, 182);
             dtg_OrderDetailList.Name = "dtg_OrderDetailList";
             dtg_OrderDetailList.RowHeadersWidth = 62;
             dtg_OrderDetailList.RowTemplate.Height = 33;
-            dtg_OrderDetailList.Size = new Size(1199, 200);
+            dtg_OrderDetailList.Size = new Size(1120, 218);
             dtg_OrderDetailList.TabIndex = 28;
             dtg_OrderDetailList.CellDoubleClick += dtg_OrderDetailList_CellDoubleClick;
             // 
@@ -361,12 +370,12 @@ namespace PRN211_BirdFarmShop
             // panel1
             // 
             panel1.Controls.Add(btn_Dong);
-            panel1.Controls.Add(btn_InHoaDon);
+            panel1.Controls.Add(btn_LưuFile);
             panel1.Controls.Add(btn_HuyHoaDon);
             panel1.Controls.Add(btn_LuuHoaDon);
             panel1.Controls.Add(btn_ThemSanPham);
             panel1.Controls.Add(btn_ThemHoaDon);
-            panel1.Location = new Point(8, 389);
+            panel1.Location = new Point(193, 457);
             panel1.Name = "panel1";
             panel1.Size = new Size(1197, 59);
             panel1.TabIndex = 26;
@@ -377,26 +386,27 @@ namespace PRN211_BirdFarmShop
             btn_Dong.ForeColor = Color.FromArgb(0, 117, 214);
             btn_Dong.Image = (Image)resources.GetObject("btn_Dong.Image");
             btn_Dong.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_Dong.Location = new Point(998, 5);
+            btn_Dong.Location = new Point(1011, 5);
             btn_Dong.Name = "btn_Dong";
-            btn_Dong.Size = new Size(190, 48);
+            btn_Dong.Size = new Size(177, 48);
             btn_Dong.TabIndex = 6;
             btn_Dong.Text = "Đóng";
             btn_Dong.UseVisualStyleBackColor = true;
             btn_Dong.Click += btn_Dong_Click;
             // 
-            // btn_InHoaDon
+            // btn_LưuFile
             // 
-            btn_InHoaDon.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btn_InHoaDon.ForeColor = Color.FromArgb(0, 117, 214);
-            btn_InHoaDon.Image = (Image)resources.GetObject("btn_InHoaDon.Image");
-            btn_InHoaDon.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_InHoaDon.Location = new Point(802, 5);
-            btn_InHoaDon.Name = "btn_InHoaDon";
-            btn_InHoaDon.Size = new Size(190, 48);
-            btn_InHoaDon.TabIndex = 5;
-            btn_InHoaDon.Text = "In hoá đơn";
-            btn_InHoaDon.UseVisualStyleBackColor = true;
+            btn_LưuFile.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_LưuFile.ForeColor = Color.FromArgb(0, 117, 214);
+            btn_LưuFile.Image = (Image)resources.GetObject("btn_LưuFile.Image");
+            btn_LưuFile.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_LưuFile.Location = new Point(802, 5);
+            btn_LưuFile.Name = "btn_LưuFile";
+            btn_LưuFile.Size = new Size(203, 48);
+            btn_LưuFile.TabIndex = 5;
+            btn_LưuFile.Text = "Lưu file Excel";
+            btn_LưuFile.UseVisualStyleBackColor = true;
+            btn_LưuFile.Click += btn_LưuFile_Click;
             // 
             // btn_HuyHoaDon
             // 
@@ -472,15 +482,16 @@ namespace PRN211_BirdFarmShop
             panel2.Controls.Add(label8);
             panel2.Location = new Point(8, 30);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1197, 110);
+            panel2.Size = new Size(1555, 146);
             panel2.TabIndex = 27;
             // 
             // txt_GiongLoai
             // 
-            txt_GiongLoai.Location = new Point(944, 13);
+            txt_GiongLoai.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_GiongLoai.Location = new Point(1234, 28);
             txt_GiongLoai.Name = "txt_GiongLoai";
             txt_GiongLoai.ReadOnly = true;
-            txt_GiongLoai.Size = new Size(212, 31);
+            txt_GiongLoai.Size = new Size(228, 39);
             txt_GiongLoai.TabIndex = 27;
             // 
             // label17
@@ -488,7 +499,7 @@ namespace PRN211_BirdFarmShop
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label17.ForeColor = Color.FromArgb(0, 117, 214);
-            label17.Location = new Point(828, 16);
+            label17.Location = new Point(1066, 39);
             label17.Name = "label17";
             label17.Size = new Size(110, 28);
             label17.TabIndex = 26;
@@ -496,26 +507,29 @@ namespace PRN211_BirdFarmShop
             // 
             // txt_SoLuong
             // 
-            txt_SoLuong.Location = new Point(135, 67);
+            txt_SoLuong.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_SoLuong.Location = new Point(190, 85);
             txt_SoLuong.Name = "txt_SoLuong";
-            txt_SoLuong.Size = new Size(212, 31);
+            txt_SoLuong.Size = new Size(243, 39);
             txt_SoLuong.TabIndex = 21;
             txt_SoLuong.TextChanged += txt_SoLuong_TextChanged;
             // 
             // txt_DonGia
             // 
-            txt_DonGia.Location = new Point(556, 67);
+            txt_DonGia.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_DonGia.Location = new Point(697, 85);
             txt_DonGia.Name = "txt_DonGia";
             txt_DonGia.ReadOnly = true;
-            txt_DonGia.Size = new Size(212, 31);
+            txt_DonGia.Size = new Size(240, 39);
             txt_DonGia.TabIndex = 24;
             // 
             // txt_ThanhTien
             // 
-            txt_ThanhTien.Location = new Point(944, 64);
+            txt_ThanhTien.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_ThanhTien.Location = new Point(1234, 90);
             txt_ThanhTien.Name = "txt_ThanhTien";
             txt_ThanhTien.ReadOnly = true;
-            txt_ThanhTien.Size = new Size(212, 31);
+            txt_ThanhTien.Size = new Size(228, 39);
             txt_ThanhTien.TabIndex = 25;
             // 
             // label10
@@ -523,7 +537,7 @@ namespace PRN211_BirdFarmShop
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label10.ForeColor = Color.FromArgb(0, 117, 214);
-            label10.Location = new Point(410, 70);
+            label10.Location = new Point(556, 96);
             label10.Name = "label10";
             label10.Size = new Size(88, 28);
             label10.TabIndex = 17;
@@ -531,10 +545,11 @@ namespace PRN211_BirdFarmShop
             // 
             // cbx_MaHang
             // 
+            cbx_MaHang.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             cbx_MaHang.FormattingEnabled = true;
-            cbx_MaHang.Location = new Point(135, 16);
+            cbx_MaHang.Location = new Point(190, 27);
             cbx_MaHang.Name = "cbx_MaHang";
-            cbx_MaHang.Size = new Size(212, 33);
+            cbx_MaHang.Size = new Size(243, 40);
             cbx_MaHang.TabIndex = 10;
             cbx_MaHang.SelectedValueChanged += cbx_MaHang_SelectedValueChanged;
             // 
@@ -543,7 +558,7 @@ namespace PRN211_BirdFarmShop
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.FromArgb(0, 117, 214);
-            label6.Location = new Point(30, 21);
+            label6.Location = new Point(60, 40);
             label6.Name = "label6";
             label6.Size = new Size(97, 28);
             label6.TabIndex = 2;
@@ -554,7 +569,7 @@ namespace PRN211_BirdFarmShop
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label11.ForeColor = Color.FromArgb(0, 117, 214);
-            label11.Location = new Point(828, 64);
+            label11.Location = new Point(1066, 101);
             label11.Name = "label11";
             label11.Size = new Size(115, 28);
             label11.TabIndex = 18;
@@ -562,10 +577,11 @@ namespace PRN211_BirdFarmShop
             // 
             // txt_TenHang
             // 
-            txt_TenHang.Location = new Point(556, 16);
+            txt_TenHang.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_TenHang.Location = new Point(697, 28);
             txt_TenHang.Name = "txt_TenHang";
             txt_TenHang.ReadOnly = true;
-            txt_TenHang.Size = new Size(212, 31);
+            txt_TenHang.Size = new Size(240, 39);
             txt_TenHang.TabIndex = 22;
             // 
             // label7
@@ -573,7 +589,7 @@ namespace PRN211_BirdFarmShop
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.FromArgb(0, 117, 214);
-            label7.Location = new Point(30, 67);
+            label7.Location = new Point(60, 96);
             label7.Name = "label7";
             label7.Size = new Size(99, 28);
             label7.TabIndex = 11;
@@ -584,7 +600,7 @@ namespace PRN211_BirdFarmShop
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = Color.FromArgb(0, 117, 214);
-            label8.Location = new Point(410, 16);
+            label8.Location = new Point(556, 40);
             label8.Name = "label8";
             label8.Size = new Size(101, 28);
             label8.TabIndex = 13;
@@ -592,9 +608,10 @@ namespace PRN211_BirdFarmShop
             // 
             // txt_TimMaHH
             // 
-            txt_TimMaHH.Location = new Point(182, 712);
+            txt_TimMaHH.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txt_TimMaHH.Location = new Point(177, 860);
             txt_TimMaHH.Name = "txt_TimMaHH";
-            txt_TimMaHH.Size = new Size(584, 31);
+            txt_TimMaHH.Size = new Size(522, 39);
             txt_TimMaHH.TabIndex = 2;
             // 
             // btn_TimKiem
@@ -603,9 +620,9 @@ namespace PRN211_BirdFarmShop
             btn_TimKiem.ForeColor = Color.FromArgb(0, 117, 214);
             btn_TimKiem.Image = (Image)resources.GetObject("btn_TimKiem.Image");
             btn_TimKiem.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_TimKiem.Location = new Point(783, 706);
+            btn_TimKiem.Location = new Point(722, 850);
             btn_TimKiem.Name = "btn_TimKiem";
-            btn_TimKiem.Size = new Size(190, 40);
+            btn_TimKiem.Size = new Size(190, 49);
             btn_TimKiem.TabIndex = 6;
             btn_TimKiem.Text = "Tìm kiếm";
             btn_TimKiem.UseVisualStyleBackColor = true;
@@ -616,17 +633,48 @@ namespace PRN211_BirdFarmShop
             label14.AutoSize = true;
             label14.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label14.ForeColor = Color.FromArgb(0, 117, 214);
-            label14.Location = new Point(49, 715);
+            label14.Location = new Point(41, 871);
             label14.Name = "label14";
             label14.Size = new Size(127, 28);
             label14.TabIndex = 14;
             label14.Text = "Mã hoá đơn:";
             // 
+            // btn_XemSP
+            // 
+            btn_XemSP.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_XemSP.ForeColor = Color.FromArgb(0, 117, 214);
+            btn_XemSP.Image = (Image)resources.GetObject("btn_XemSP.Image");
+            btn_XemSP.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_XemSP.Location = new Point(928, 849);
+            btn_XemSP.Name = "btn_XemSP";
+            btn_XemSP.Size = new Size(209, 49);
+            btn_XemSP.TabIndex = 15;
+            btn_XemSP.Text = "Xem sản phẩm";
+            btn_XemSP.TextAlign = ContentAlignment.MiddleRight;
+            btn_XemSP.UseVisualStyleBackColor = true;
+            btn_XemSP.Click += btn_XemSP_Click;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = Color.FromArgb(0, 117, 214);
+            button1.Image = (Image)resources.GetObject("button1.Image");
+            button1.ImageAlign = ContentAlignment.MiddleLeft;
+            button1.Location = new Point(1161, 849);
+            button1.Name = "button1";
+            button1.Size = new Size(223, 50);
+            button1.TabIndex = 16;
+            button1.Text = "Thêm khách hàng";
+            button1.TextAlign = ContentAlignment.MiddleRight;
+            button1.UseVisualStyleBackColor = true;
+            // 
             // OrderForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1213, 755);
+            ClientSize = new Size(1581, 930);
+            Controls.Add(button1);
+            Controls.Add(btn_XemSP);
             Controls.Add(label14);
             Controls.Add(btn_TimKiem);
             Controls.Add(txt_TimMaHH);
@@ -689,7 +737,7 @@ namespace PRN211_BirdFarmShop
         private Label label16;
         private ComboBox cbx_SoDienThoai;
         private Label label15;
-        private Button btn_InHoaDon;
+        private Button btn_LưuFile;
         private Button btn_HuyHoaDon;
         private Button btn_Dong;
         private Button btn_TimKiem;
@@ -704,5 +752,7 @@ namespace PRN211_BirdFarmShop
         private DataGridViewTextBoxColumn Quantity;
         private DataGridViewTextBoxColumn Price;
         private DataGridViewTextBoxColumn Total;
+        private Button btn_XemSP;
+        private Button button1;
     }
 }
