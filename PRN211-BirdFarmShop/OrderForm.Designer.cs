@@ -171,6 +171,7 @@ namespace PRN211_BirdFarmShop
             cbx_SoDienThoai.Size = new Size(266, 40);
             cbx_SoDienThoai.TabIndex = 11;
             cbx_SoDienThoai.SelectedValueChanged += cbx_SoDienThoai_SelectedValueChanged;
+            cbx_SoDienThoai.TextChanged += cbx_SoDienThoai_TextChanged;
             // 
             // label15
             // 
@@ -672,7 +673,7 @@ namespace PRN211_BirdFarmShop
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1581, 930);
+            ClientSize = new Size(1581, 915);
             Controls.Add(button1);
             Controls.Add(btn_XemSP);
             Controls.Add(label14);

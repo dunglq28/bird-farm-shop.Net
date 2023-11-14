@@ -112,6 +112,27 @@ namespace PRN211_BirdFarmShop
             {
                 txt_TenKhachHang.Text = acc.Fullname;
             }
+            else
+            {
+                txt_TenKhachHang.Text = "";
+            }
+        }
+
+        private void cbx_SoDienThoai_TextChanged(object sender, EventArgs e)
+        {
+            Account acc = null;
+            if (cbx_SoDienThoai.SelectedValue is not null)
+            {
+                acc = _accountService.GetAccountCusByPhone(cbx_SoDienThoai.SelectedValue.ToString());
+            }
+            if (acc is not null)
+            {
+                txt_TenKhachHang.Text = acc.Fullname;
+            }
+            else
+            {
+                txt_TenKhachHang.Text = "";
+            }
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -479,5 +500,7 @@ namespace PRN211_BirdFarmShop
             ProductMangementForm productfrm = new ProductMangementForm();
             productfrm.Show();
         }
+
+
     }
 }
