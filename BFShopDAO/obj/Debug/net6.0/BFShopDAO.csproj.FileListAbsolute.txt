@@ -1,0 +1,16 @@
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\bin\Debug\net6.0\appsettings.json
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\bin\Debug\net6.0\BFShopDAO.deps.json
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\bin\Debug\net6.0\BFShopDAO.dll
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\bin\Debug\net6.0\BFShopDAO.pdb
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\bin\Debug\net6.0\BFShopBussinessObjects.dll
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\bin\Debug\net6.0\BFShopBussinessObjects.pdb
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\obj\Debug\net6.0\BFShopDAO.csproj.AssemblyReference.cache
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\obj\Debug\net6.0\BFShopDAO.GeneratedMSBuildEditorConfig.editorconfig
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\obj\Debug\net6.0\BFShopDAO.AssemblyInfoInputs.cache
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\obj\Debug\net6.0\BFShopDAO.AssemblyInfo.cs
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\obj\Debug\net6.0\BFShopDAO.csproj.CoreCompileInputs.cache
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\obj\Debug\net6.0\BFShopDAO.csproj.CopyComplete
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\obj\Debug\net6.0\BFShopDAO.dll
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\obj\Debug\net6.0\refint\BFShopDAO.dll
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\obj\Debug\net6.0\BFShopDAO.pdb
+D:\C# source\PRN211-BirdFarmShop\BFShopDAO\obj\Debug\net6.0\ref\BFShopDAO.dll

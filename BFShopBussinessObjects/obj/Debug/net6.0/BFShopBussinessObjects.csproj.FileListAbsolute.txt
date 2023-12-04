@@ -1,0 +1,14 @@
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\bin\Debug\net6.0\BFShopBussinessObjects.deps.json
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\bin\Debug\net6.0\BFShopBussinessObjects.runtimeconfig.json
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\bin\Debug\net6.0\BFShopBussinessObjects.dll
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\bin\Debug\net6.0\BFShopBussinessObjects.pdb
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\obj\Debug\net6.0\BFShopBussinessObjects.csproj.AssemblyReference.cache
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\obj\Debug\net6.0\BFShopBussinessObjects.GeneratedMSBuildEditorConfig.editorconfig
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\obj\Debug\net6.0\BFShopBussinessObjects.AssemblyInfoInputs.cache
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\obj\Debug\net6.0\BFShopBussinessObjects.AssemblyInfo.cs
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\obj\Debug\net6.0\BFShopBussinessObjects.csproj.CoreCompileInputs.cache
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\obj\Debug\net6.0\BFShopBussinessObjects.dll
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\obj\Debug\net6.0\refint\BFShopBussinessObjects.dll
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\obj\Debug\net6.0\BFShopBussinessObjects.pdb
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\obj\Debug\net6.0\BFShopBussinessObjects.genruntimeconfig.cache
+D:\C# source\PRN211-BirdFarmShop\BFShopBussinessObjects\obj\Debug\net6.0\ref\BFShopBussinessObjects.dll
